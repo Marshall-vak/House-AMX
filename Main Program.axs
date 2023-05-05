@@ -76,27 +76,25 @@ dvIO = 5001:17:0	// GPIO
 dvRELAY = 5001:8:0      //Relays
 
 // RS-232 Connections planned not connected as of now.
-dvCOM1 = 5001:1:0	// RS-232 port 1 (Left Projector)
-dvCOM2 = 5001:2:0	// RS-232 port 2 (Center Projector)
-dvCOM3 = 5001:3:0	// RS-232 port 3 (Right Projector)
-dvCOM4 = 5001:4:0	// RS-232 port 4 (Light Board)
+dvCOM1_HRoomTv = 5001:1:0	// RS-232 port 1 (Phillips)
+//dvCOM2 = 5001:2:0	// RS-232 port 2 
+//dvCOM3 = 5001:3:0	// RS-232 port 3 
+//dvCOM4 = 5001:4:0	// RS-232 port 4 
 
 //internal switcher connection
 dvDVXSW = 5002:1:0	// Switcher
 dvSWV = 5002:1:8	// Switcher Video
 dvSWA = 5002:1:10	// Switcher Audio
 
-dvLeftProjector = 5002:1:0
-dvRightProjector = 5002:2:0
-dvCenterProjector = 5002:3:0
-dvBackProjector = 5002:4:0
+//Video outputs
+dvHdmi1 = 5002:1:0
+dvHdmi2 = 5002:2:0
+dvHdmi3 = 5002:3:0
+dvHdmi4 = 5002:4:0
 
-
-//Touch Pannel (Sound Board)
-dvTP1 = 10001:1:0	// NXT-CV7-1 
-
-//Touch Pannel (Booth)
-dvTP2 = 10002:1:0	// NXT-CV7-2 
+//Touch Pannels
+dvTP_HRoom = 10001:1:0	// HRoom
+dvTP_LRoom = 10002:1:0	// Lroom 
  
 (***********************************************************)
 (*               CONSTANT DEFINITIONS GO BELOW             *)
@@ -116,11 +114,14 @@ LONG lLoopTimes[] = { 500, 500, 500, 500, 500, 500, 500, 500 }
 //test button
 
 //touch pannels
-DEV dvTPMaster[] = { dvTP1, dvTP2 }
+DEV dvTPMaster[] = { dvTP_HRoom, dvTP_LRoom }
 
 //dynamic vars
+INTEGER dynamic
+
 
 //dynamic device
+DEV dvDynamic
 
 (***********************************************************)
 (*              Function DEFINITIONS GO BELOW              *)
@@ -145,7 +146,7 @@ DEFINE_FUNCTION INTEGER fnGetIndex(INTEGER nArray[], INTEGER nValue){
 DEFINE_START
 
 //yay
-print("'Starting WSHS AMX Automation!'",false);
+print("'Starting WSHS AMX Automation!'", false);
  
 // loop io as its fun
 TIMELINE_CREATE(TL_LOOP, lLoopTimes, LENGTH_ARRAY(lLoopTimes), TIMELINE_RELATIVE, TIMELINE_REPEAT);
@@ -157,21 +158,21 @@ DEFINE_EVENT
 
 
 // beep dvTP1 on startup 
-DATA_EVENT[dvTP1]
+DATA_EVENT[dvTP_HRoom]
 {
     ONLINE:
     {
-        moderoBeepDouble(dvTP1)
+        moderoBeepDouble(dvTP_HRoom)
 	SEND_STRING dvCONSOLE, 'a TP came Online!'
     }
 }
 
 // beep dvTP2 on startup 
-DATA_EVENT[dvTP2]
+DATA_EVENT[dvTP_LRoom]
 {
     ONLINE:
     {
-        moderoBeepDouble(dvTP2)
+        moderoBeepDouble(dvTP_LRoom)
 	SEND_STRING dvCONSOLE, 'a TP came Online!'
     }
 }
@@ -181,11 +182,17 @@ DATA_EVENT[dvTP2]
 {
     PUSH:
     {
+	//local vars
+	LOCAL_VAR dev dvDynamic
+	LOCAL_VAR INTEGER strCommand
+	LOCAL_VAR INTEGER Input
+	LOCAL_VAR INTEGER Output
+	
         TO[BUTTON.INPUT]
+	print("'Button pushed on dvTP:', devToString(Button.Input.Device), ' BUTTON.INPUT.CHANNEL: ', ITOA(BUTTON.INPUT.CHANNEL)", false)
 	
 	
 	
-	}
     }
 }
 
