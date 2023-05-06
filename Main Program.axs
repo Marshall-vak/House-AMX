@@ -4,7 +4,7 @@ PROGRAM_NAME='Main Program'
 #include 'amx-modero-control'
 #include 'debug'
 
-//so much easier with the lib
+//so much easier with the libs
 //dvxSwitchVideoOnly(dev dvxPort1, integer input, integer output)
 //dvxSwitchAudioOnly(dev dvxPort1, integer input, integer output)
 //dvxEnableVideoOutputFreeze (dev dvxVideoOutputPort)
@@ -77,7 +77,7 @@ dvRELAY = 5001:8:0      //Relays
 
 // RS-232 Connections planned not connected as of now.
 dvCOM1_HRoomTv = 5001:1:0	// RS-232 port 1 (Phillips)
-//dvCOM2 = 5001:2:0	// RS-232 port 2 
+dvCOM2 = 5001:2:0	// RS-232 port 2 
 //dvCOM3 = 5001:3:0	// RS-232 port 3 
 //dvCOM4 = 5001:4:0	// RS-232 port 4 
 
@@ -95,7 +95,7 @@ dvHdmi4 = 5002:4:0
 //Touch Pannels
 dvTP_HRoom = 10001:1:0	// HRoom
 dvTP_LRoom = 10002:1:0	// Lroom 
- 
+
 (***********************************************************)
 (*               CONSTANT DEFINITIONS GO BELOW             *)
 (***********************************************************)
@@ -107,17 +107,21 @@ TL_LOOP = 1
 (*               VARIABLE DEFINITIONS GO BELOW             *)
 (***********************************************************)
 DEFINE_VARIABLE
- 
+
 // loop io as its fun
 LONG lLoopTimes[] = { 500, 500, 500, 500, 500, 500, 500, 500 }
 
-//test button
+//buttons
+
+//input button codes in order left to right
+integer InputButtons[] = { 1, 2, 3, 4, 5, 6 }
+
+//per room device input codes in order left to right
+integer HRoomInputs[] = { 5, 6 }
+integer LRoomInputs[] = { 5, 6 }
 
 //touch pannels
 DEV dvTPMaster[] = { dvTP_HRoom, dvTP_LRoom }
-
-//dynamic vars
-INTEGER dynamic
 
 
 //dynamic device
@@ -138,15 +142,15 @@ DEFINE_FUNCTION INTEGER fnGetIndex(INTEGER nArray[], INTEGER nValue){
    RETURN 0
 
 }
-
  
 (***********************************************************)
 (*                 STARTUP CODE GOES BELOW                 *)
 (***********************************************************)
+
 DEFINE_START
 
 //yay
-print("'Starting WSHS AMX Automation!'", false);
+print("'Starting AMX Automation!'", false);
  
 // loop io as its fun
 TIMELINE_CREATE(TL_LOOP, lLoopTimes, LENGTH_ARRAY(lLoopTimes), TIMELINE_RELATIVE, TIMELINE_REPEAT);
@@ -154,6 +158,7 @@ TIMELINE_CREATE(TL_LOOP, lLoopTimes, LENGTH_ARRAY(lLoopTimes), TIMELINE_RELATIVE
 (***********************************************************)
 (*                  THE EVENTS GO BELOW                    *)
 (***********************************************************)
+
 DEFINE_EVENT
 
 
@@ -177,22 +182,66 @@ DATA_EVENT[dvTP_LRoom]
     }
 }
 
-//projection Buttons
+(*
+    room numbers
+    HBedroom = 2
+    LivingRoom = 1
+    MBedroom = 3 
+    MBathroom = 4
+*)
+
+//Button Press
  BUTTON_EVENT[dvTPMaster, 0]
 {
     PUSH:
     {
 	//local vars
-	LOCAL_VAR dev dvDynamic
-	LOCAL_VAR INTEGER strCommand
-	LOCAL_VAR INTEGER Input
-	LOCAL_VAR INTEGER Output
+	LOCAL_VAR dev dvDynamicHdmi
+	LOCAL_VAR dev dvDynamicCom
+	LOCAL_VAR INTEGER VidInput
+	LOCAL_VAR INTEGER VidOutput
+	LOCAL_VAR INTEGER AudInput
+	LOCAL_VAR INTEGER AudOutput
 	
         TO[BUTTON.INPUT]
-	print("'Button pushed on dvTP:', devToString(Button.Input.Device), ' BUTTON.INPUT.CHANNEL: ', ITOA(BUTTON.INPUT.CHANNEL)", false)
 	
+	SEND_STRING dvCONSOLE, "'Button pushed on dvTP: ', devToString(Button.Input.Device), ' BUTTON.INPUT.CHANNEL: ', ITOA(BUTTON.INPUT.CHANNEL)"
 	
+	VidInput = 0
+	VidOutput = 0
+	AudInput = 0
+	AudOutput = 0
 	
+	if (fnGetIndex(InputButtons, BUTTON.INPUT.CHANNEL) != 0){
+	    if (BUTTON.INPUT.DEVICE == dvTP_HRoom){
+		VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+		VidOutput = 1
+		AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+		AudOutput = 2
+		dvDynamicHdmi = dvHdmi1
+		dvDynamicCom = dvCOM1_HRoomTv
+	    }
+	    
+	    if (BUTTON.INPUT.DEVICE == dvTP_LRoom){
+		VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+		VidOutput = 2
+		AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+		AudOutput = 3
+		dvDynamicHdmi = dvHdmi2
+		dvDynamicCom = dvCOM2 // tmp <======================================
+	    }
+	    
+	    
+	    //dvxSwitchVideoOnly(dev dvxPort1, integer input, integer output)
+	    //dvxSwitchAudioOnly(dev dvxPort1, integer input, integer output)
+	    if (VidOutput != 0 && VidInput != 0){
+		dvxSwitchVideoOnly(dvDVXSW, VidInput, VidOutput)
+	    }
+	    
+	    if(AudOutput != 0 && AudInput != 0){
+		dvxSwitchAudioOnly(dvDVXSW, AudInput, AudOutput)
+	    }
+	}
     }
 }
 

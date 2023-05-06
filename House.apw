@@ -109,23 +109,24 @@
        <!ELEMENT Notes (#PCDATA)>
 ]>
 
-<Workspace CurrentVersion="4.0"><Identifier>Winter Springs High School</Identifier>
+<Workspace CurrentVersion="4.0"><Identifier>house</Identifier>
 <CreateVersion>4.0</CreateVersion>
 <PJS_File></PJS_File>
 <PJS_ConvertDate></PJS_ConvertDate>
 <PJS_CreateDate></PJS_CreateDate>
-<Comments></Comments>
+<Comments>For Personal amx
+</Comments>
 <Project><Identifier>Main</Identifier>
 <Designer></Designer>
 <DealerID></DealerID>
 <SalesOrder></SalesOrder>
 <PurchaseOrder></PurchaseOrder>
 <Comments></Comments>
-<System IsActive="true" Platform="Netlinx" Transport="Serial" TransportEx="TCPIP"><Identifier>DVX-3155HD-T</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="Serial" TransportEx="TCPIP"><Identifier>DVX-3155HD-T</Identifier>
 <SysID>0</SysID>
 <TransTCPIP>0.0.0.0</TransTCPIP>
 <TransSerial>COM1,115200,8,None,1,None</TransSerial>
-<TransTCPIPEx>192.168.1.2|1319|1| ||</TransTCPIPEx>
+<TransTCPIPEx>192.168.3.20|1319|1| ||</TransTCPIPEx>
 <TransSerialEx>COM7|57600|8|None|1|None||</TransSerialEx>
 <TransUSBEx>|||||</TransUSBEx>
 <TransVNMEx>10.0.0.1|1|&lt;Default&gt;</TransVNMEx>
@@ -168,8 +169,104 @@
 <FilePathName>modules\amx-modero-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Include"><Identifier>base64</Identifier>
+<FilePathName>modules\base64.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>binary</Identifier>
+<FilePathName>modules\binary.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>cipher</Identifier>
+<FilePathName>modules\cipher.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>codec</Identifier>
+<FilePathName>modules\codec.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="Include"><Identifier>common</Identifier>
 <FilePathName>modules\common.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>convert</Identifier>
+<FilePathName>modules\convert.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>crypto</Identifier>
+<FilePathName>modules\crypto.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>date-time</Identifier>
+<FilePathName>modules\date-time.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>debug</Identifier>
+<FilePathName>modules\debug.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>dictionary</Identifier>
+<FilePathName>modules\dictionary.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>hash</Identifier>
+<FilePathName>modules\hash.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>hmac</Identifier>
+<FilePathName>modules\hmac.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>http</Identifier>
+<FilePathName>modules\http.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>json-rpc</Identifier>
+<FilePathName>modules\json-rpc.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>json</Identifier>
+<FilePathName>modules\json.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>jwt</Identifier>
+<FilePathName>modules\jwt.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>math</Identifier>
+<FilePathName>modules\math.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>md5</Identifier>
+<FilePathName>modules\md5.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>proto</Identifier>
+<FilePathName>modules\proto.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>sha1</Identifier>
+<FilePathName>modules\sha1.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>sha256</Identifier>
+<FilePathName>modules\sha256.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>string</Identifier>
+<FilePathName>modules\string.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>uri</Identifier>
+<FilePathName>modules\uri.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>websockets</Identifier>
+<FilePathName>modules\websockets.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>xml</Identifier>
+<FilePathName>modules\xml.axi</FilePathName>
 <Comments></Comments>
 </File>
 </System>
