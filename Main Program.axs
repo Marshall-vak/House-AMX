@@ -85,7 +85,7 @@ dvCOM4_LroomTv = 5001:4:0	// RS-232 port 4 (Sharp)
 dvDVXSW = 5002:1:0	// Switcher
 dvSWV = 5002:1:8	// Switcher Video
 dvSWA = 5002:1:10	// Switcher Audio
-                                                                                                      
+ 
 //Video outputs
 dvHdmi1_MBRoomTv = 5002:1:0
 dvHdmi2_HRoomTv = 5002:2:0
