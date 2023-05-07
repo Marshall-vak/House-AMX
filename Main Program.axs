@@ -76,25 +76,27 @@ dvIO = 5001:17:0	// GPIO
 dvRELAY = 5001:8:0      //Relays
 
 // RS-232 Connections planned not connected as of now.
-dvCOM1_HRoomTv = 5001:1:0	// RS-232 port 1 (Phillips)
-dvCOM2 = 5001:2:0	// RS-232 port 2 
-//dvCOM3 = 5001:3:0	// RS-232 port 3 
-//dvCOM4 = 5001:4:0	// RS-232 port 4 
+dvCOM1_MBRoomTv = 5001:1:0	// RS-232 port 1 
+dvCOM2_HRoomTv = 5001:2:0	// RS-232 port 2 (Philips)
+dvCOM3_4thRoom = 5001:3:0	// RS-232 port 3 
+dvCOM4_LroomTv = 5001:4:0	// RS-232 port 4 (Sharp)
 
 //internal switcher connection
 dvDVXSW = 5002:1:0	// Switcher
 dvSWV = 5002:1:8	// Switcher Video
 dvSWA = 5002:1:10	// Switcher Audio
-
+                                                                                                      
 //Video outputs
-dvHdmi1 = 5002:1:0
-dvHdmi2 = 5002:2:0
-dvHdmi3 = 5002:3:0
-dvHdmi4 = 5002:4:0
+dvHdmi1_MBRoomTv = 5002:1:0
+dvHdmi2_HRoomTv = 5002:2:0
+dvHdmi3_4thRoom = 5002:3:0
+dvHdmi4_LroomTv = 5002:4:0
 
 //Touch Pannels
-dvTP_HRoom = 10001:1:0	// HRoom
-dvTP_LRoom = 10002:1:0	// Lroom 
+dvTP_HRoom = 10001:1:0	 // HRoom
+dvTP_LRoom = 10002:1:0	 // Lroom 
+dvTP_MBRoom = 10003:1:0	 // HRoom
+dvTP_4thRoom = 10004:1:0 // Lroom 
 
 (***********************************************************)
 (*               CONSTANT DEFINITIONS GO BELOW             *)
@@ -117,8 +119,12 @@ LONG lLoopTimes[] = { 500, 500, 500, 500, 500, 500, 500, 500 }
 integer InputButtons[] = { 1, 2, 3, 4, 5, 6 }
 
 //per room device input codes in order left to right
-integer HRoomInputs[] = { 5, 6 }
-integer LRoomInputs[] = { 5, 6 }
+integer HRoomInputs[] = { 5, 6, 1, 2, 3, 4 }
+integer LRoomInputs[] = { 5, 6, 1, 2, 3, 4 }
+
+//Display Power Buttons
+integer DisplayPower[] = { 254, 255 }
+integer PowerOnButtons[] = { 255 }
 
 //touch pannels
 DEV dvTPMaster[] = { dvTP_HRoom, dvTP_LRoom }
@@ -161,6 +167,43 @@ TIMELINE_CREATE(TL_LOOP, lLoopTimes, LENGTH_ARRAY(lLoopTimes), TIMELINE_RELATIVE
 
 DEFINE_EVENT
 
+(*
+// RS-232 Connections planned not connected as of now.
+dvCOM1_HRoomTv = 5001:1:0	// RS-232 port 1 (Philips)
+dvCOM2_LroomTv = 5001:2:0	// RS-232 port 2 (Sharp)
+dvCOM3_MBRoomTv = 5001:3:0	// RS-232 port 3 
+dvCOM4 = 5001:4:0	// RS-232 port 4 
+*)
+
+//serial links
+DATA_EVENT[dvCOM2_HRoomTv]
+{
+    online: {
+	SEND_COMMAND dvCOM2_HRoomTv,'SET BAUD 9600,N,8,1'
+	SEND_COMMAND dvCOM2_HRoomTv, 'HSOFF'
+    }
+    
+    STRING: {
+	STACK_VAR CHAR msg[16]
+	
+	SEND_STRING dvCONSOLE, "'dvCOM2_HRoomTv returned:', msg"
+    }
+}
+
+DATA_EVENT[dvCOM4_LroomTv]
+{
+    online: {
+	SEND_COMMAND dvCOM4_LroomTv,'SET BAUD 9600,N,8,1'
+	SEND_COMMAND dvCOM4_LroomTv, 'HSOFF'
+    }
+    
+    STRING: {
+	STACK_VAR CHAR msg[16]
+	
+	SEND_STRING dvCONSOLE, "'dvCOM4_LroomTv returned:', msg"
+    }
+}
+
 
 // beep dvTP1 on startup 
 DATA_EVENT[dvTP_HRoom]
@@ -202,6 +245,7 @@ DATA_EVENT[dvTP_LRoom]
 	LOCAL_VAR INTEGER VidOutput
 	LOCAL_VAR INTEGER AudInput
 	LOCAL_VAR INTEGER AudOutput
+	LOCAL_VAR INTEGER devCommand
 	
         TO[BUTTON.INPUT]
 	
@@ -212,26 +256,43 @@ DATA_EVENT[dvTP_LRoom]
 	AudInput = 0
 	AudOutput = 0
 	
+	if (BUTTON.INPUT.DEVICE == dvTP_HRoom){
+	    VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    VidOutput = 2
+	    AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    AudOutput = 2
+	    dvDynamicHdmi = dvHdmi2_HRoomTv
+	    dvDynamicCom = dvCOM2_HRoomTv
+	}
+	    
+	if (BUTTON.INPUT.DEVICE == dvTP_LRoom){
+	    VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    VidOutput = 4
+	    AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    AudOutput = 3
+	    dvDynamicHdmi = dvHdmi4_LroomTv
+	    dvDynamicCom = dvCOM4_LroomTv
+	}
+	
+	if (BUTTON.INPUT.DEVICE == dvTP_MBRoom){
+	    VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    VidOutput = 1
+	    AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    AudOutput = 0
+	    dvDynamicHdmi = dvHdmi1_MBRoomTv
+	    dvDynamicCom = dvCOM1_MBRoomTv
+	}
+	
+	if (BUTTON.INPUT.DEVICE == dvTP_4thRoom){
+	    VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    VidOutput = 3
+	    AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    AudOutput = 0
+	    dvDynamicHdmi = dvHdmi3_4thRoom
+	    dvDynamicCom = dvCOM3_4thRoom
+	}
+	
 	if (fnGetIndex(InputButtons, BUTTON.INPUT.CHANNEL) != 0){
-	    if (BUTTON.INPUT.DEVICE == dvTP_HRoom){
-		VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
-		VidOutput = 1
-		AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
-		AudOutput = 2
-		dvDynamicHdmi = dvHdmi1
-		dvDynamicCom = dvCOM1_HRoomTv
-	    }
-	    
-	    if (BUTTON.INPUT.DEVICE == dvTP_LRoom){
-		VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
-		VidOutput = 2
-		AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
-		AudOutput = 3
-		dvDynamicHdmi = dvHdmi2
-		dvDynamicCom = dvCOM2 // tmp <======================================
-	    }
-	    
-	    
 	    //dvxSwitchVideoOnly(dev dvxPort1, integer input, integer output)
 	    //dvxSwitchAudioOnly(dev dvxPort1, integer input, integer output)
 	    if (VidOutput != 0 && VidInput != 0){
@@ -241,6 +302,35 @@ DATA_EVENT[dvTP_LRoom]
 	    if(AudOutput != 0 && AudInput != 0){
 		dvxSwitchAudioOnly(dvDVXSW, AudInput, AudOutput)
 	    }
+	}
+	
+	if (fnGetIndex(DisplayPower, BUTTON.INPUT.CHANNEL) != 0){
+	    if (fnGetIndex(PowerOnButtons, BUTTON.INPUT.CHANNEL) != 0){
+		if (VidOutput == 2){
+		    //SEND_STRING dvDynamicCom, "$36, $20, $30, $20, $30, $20, $32, $37, $20, $32, $20, $33, $30, $0C, $0A"
+		    //0x06 0x00 0x00 0x18 0x02 0x1E
+		    //SEND_STRING dvCONSOLE, "'sending on'"
+		    ON[dvRELAY, 2]
+		}
+		
+		if (VidOutput == 4){
+		    SEND_STRING dvDynamicCom, "'POWR 1', $0A"
+		}
+	    }else{
+		if (VidOutput == 2){
+		    //SEND_STRING dvDynamicCom, "$36, $20, $30, $20, $30, $20, $32, $37, $20, $31, $20, $33, $30, $0C, $0A"
+		    //0x06 0x00 0x00 0x18 0x01 0x1E
+		    //SEND_STRING dvCONSOLE, "'sending off'"
+		    OFF[dvRELAY, 2]
+		}
+		
+		if (VidOutput == 4){
+		    SEND_STRING dvDynamicCom, "'POWR 0', $0A"
+		}
+	    }
+	    
+	    
+	
 	}
     }
 }
