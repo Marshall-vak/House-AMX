@@ -137,6 +137,10 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
+<File CompileType="Netlinx" Type="IR"><Identifier>Verizon FIOS</Identifier>
+<FilePathName>IrEdit\Verizon FIOS.irl</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>Main Program</Identifier>
 <FilePathName>Main Program.axs</FilePathName>
 <Comments></Comments>
