@@ -1,46 +1,47 @@
 Video in
-1  | dvi    | Hunters Desktop
-2  | dvi    | Hunters Laptop
-3  | dvi    | 
+1  | dvi    | Living Room Wii
+2  | dvi    | House Cameras
+3  | dvi    | Bed Room Laptop
 4  | dvi    | 
-5  | hdmi   | DVR
-6  | hdmi   | Xbox
-7  | hdmi   | Pc
-8  | hdmi   | 
-9  | DxLink | Bedroom Cable Box
-10 | DxLink |
+5  | hdmi   | Living Room Pc
+6  | hdmi   | Living Room DVR
+7  | hdmi   | Living Room Xbox
+8  | hdmi   | Living Room Spare HDMI
+9  | DxLink | Bed Room Pc
+10 | DxLink | Master Cable Box
 
 video out
 1  | DxLink | Bed Room Tv
-2  | DxLink |
-3  | hdmi   | Hunters Room Tv
+2  | DxLink | Hunters Room Display Board
+3  | hdmi   | Bath Room Tv
 4  | hdmi   | Living Room Tv
 
 Audio in
-1  | Aux    | Hunters Desktop
-2  | Aux    | Hunters Laptop
-3  | Aux    | 
+1  | Aux    | Living Room Wii
+2  | Aux    | 
+3  | Aux    | Bed Room Laptop
 4  | Aux    | 
-5  | hdmi   | DVR
-6  | hdmi   | Xbox
-7  | hdmi   | Pc
-8  | hdmi   | 
-9  | DxLink | Bedroom Cable Box
-10 | DxLink |
+5  | hdmi   | Living Room Pc
+6  | hdmi   | Living Room DVR
+7  | hdmi   | Living Room Xbox
+8  | hdmi   | Living Room Spare HDMI
+9  | DxLink | Bed Room Pc
+10 | DxLink | Master Cable Box
 11 | Line   |
 12 | Line   |
 13 | Line   |
 14 | Line   |
 
 Audio out
-1  | SPDIF  | Living Room 
-2  | Line   | Hunters Room
+1  | Line   |
+2  | Line   | 
 3  | Line   |
-4  | Line   |
+4  | Line   | Living Room 
+5  | SPDIF  | Living Room 
 
 1  | DxLink | Bed Room Tv
-2  | DxLink |
-3  | hdmi   | Hunters Room Tv
+2  | DxLink | Hunters Room Display Board
+3  | hdmi   | Bath Room Tv
 4  | hdmi   | Living Room Tv
 
 Rs232 Outputs
@@ -52,8 +53,8 @@ Rs232 Outputs
 6  | Rs232  |
 
 Relays
-1  | Relay  | Hunters Room Power 2
-2  | Relay  | Hunters Room Power 
+1  | Relay  | Hunters Room Power
+2  | Relay  | Hunters Room Power 2 
 3  | Relay  |
 4  | Relay  | Living Room Pc power button
 5  | Relay  |
@@ -62,10 +63,10 @@ Relays
 8  | Relay  |
 
 ir
-1  | ir     | 
+1  | ir     | Master Cable Box
 2  | ir     |
 3  | ir     |
-4  | ir     | Cable Box
+4  | ir     | DVR
 5  | ir     |
 6  | ir     |
 7  | ir     |
