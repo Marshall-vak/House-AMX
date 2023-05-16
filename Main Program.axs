@@ -96,7 +96,7 @@ dvHdmi4_LroomTv = 5002:4:0
 dvTP_HRoom = 10001:1:0	 // HRoom
 dvTP_LRoom = 10002:1:0	 // Lroom 
 dvTP_MBRoom = 10003:1:0	 // HRoom
-dvTP_4thRoom = 10004:1:0 // Lroom 
+dvTP_4thRoom = 10004:1:0 // 4th room 
 
 (***********************************************************)
 (*               CONSTANT DEFINITIONS GO BELOW             *)
@@ -114,17 +114,22 @@ DEFINE_VARIABLE
 LONG lLoopTimes[] = { 500, 500, 500, 500, 500, 500, 500, 500 }
 
 //buttons
+//12 camera buttons
+//13 local tv input
 
 //input button codes in order left to right
-integer InputButtons[] = { 1, 2, 3, 4, 5, 6 }
+integer InputButtons[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }
 
 //per room device input codes in order left to right
-integer HRoomInputs[] = { 5, 6, 1, 2, 3, 4 }
-integer LRoomInputs[] = { 5, 6, 1, 2, 3, 4 }
+integer HRoomInputs[] = { 5, 6, 1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 2 }
+integer LRoomInputs[] = { 6, 10, 5, 7, 1, 13, 0, 0, 0, 0, 0, 0, 0, 0, 2 }
 
 //Display Power Buttons
 integer DisplayPower[] = { 254, 255 }
 integer PowerOnButtons[] = { 255 }
+
+//Pc Power Buttons
+integer LivingRoomPcPower[] = { 30 }
 
 //touch pannels
 DEV dvTPMaster[] = { dvTP_HRoom, dvTP_LRoom }
@@ -266,9 +271,9 @@ DATA_EVENT[dvTP_LRoom]
 	}
 	    
 	if (BUTTON.INPUT.DEVICE == dvTP_LRoom){
-	    VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    VidInput = LRoomInputs[BUTTON.INPUT.CHANNEL]
 	    VidOutput = 4
-	    AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    AudInput = LRoomInputs[BUTTON.INPUT.CHANNEL]
 	    AudOutput = 3
 	    dvDynamicHdmi = dvHdmi4_LroomTv
 	    dvDynamicCom = dvCOM4_LroomTv
@@ -328,11 +333,19 @@ DATA_EVENT[dvTP_LRoom]
 		    SEND_STRING dvDynamicCom, "'POWR 0', $0A"
 		}
 	    }
-	    
-	    
+	}
 	
+	if (fnGetIndex(LivingRoomPcPower, BUTTON.INPUT.CHANNEL) != 0){
+	    ON[dvRELAY, 4]
 	}
     }
+    
+    RELEASE:
+    {
+	if (fnGetIndex(LivingRoomPcPower, BUTTON.INPUT.CHANNEL) != 0){
+	    OFF[dvRELAY, 4]
+	}
+    }    
 }
 
 // loop io as its fun
