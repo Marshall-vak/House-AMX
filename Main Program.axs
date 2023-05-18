@@ -374,10 +374,6 @@ DATA_EVENT[dvDxMaster]
 	
 	if (fnGetIndex(ImageMuteButtons, BUTTON.INPUT.CHANNEL) != 0){
 	    dvxRequestVideoOutputMute(dvDynamicHdmi)
-	    
-	    //yes twice
-	    moderoToggleButtonFeedback(BUTTON.INPUT.DEVICE, BUTTON.INPUT.CHANNEL)
-	    moderoToggleButtonFeedback(BUTTON.INPUT.DEVICE, BUTTON.INPUT.CHANNEL)
 	}
 	
 	if (fnGetIndex(DisplayPowerOnButtons, BUTTON.INPUT.CHANNEL) != 0){
