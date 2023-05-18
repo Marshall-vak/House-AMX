@@ -1,9 +1,9 @@
 <dd-configuration version="0.1">
 	<entry vname="STATUS_LCD_BRIGHTNESS" vtype="N" vdim="1" vId="110">
-		<port1>70</port1>
+		<port1>5</port1>
 	</entry>
 	<entry vname="STATUS_LED_BRIGHTNESS" vtype="N" vdim="1" vId="111">
-		<port1>40</port1>
+		<port1>5</port1>
 	</entry>
 	<entry vname="FP_LOCKOUT" vtype="S" vdim="1" vId="125">
 		<port1>OFF</port1>
@@ -17,28 +17,28 @@
 		<port3>Logo1</port3>
 	</entry>
 	<entry vname="STATUS_VIDOUT_ASSIGN_1" vtype="N" vdim="1" vId="83">
-		<port1>5</port1>
+		<port1>8</port1>
 	</entry>
 	<entry vname="STATUS_VIDOUT_ASSIGN_2" vtype="N" vdim="1" vId="84">
-		<port1>5</port1>
+		<port1>6</port1>
 	</entry>
 	<entry vname="STATUS_VIDOUT_ASSIGN_3" vtype="N" vdim="1" vId="85">
-		<port1>5</port1>
+		<port1>6</port1>
 	</entry>
 	<entry vname="STATUS_VIDOUT_ASSIGN_4" vtype="N" vdim="1" vId="86">
-		<port1>5</port1>
+		<port1>6</port1>
 	</entry>
 	<entry vname="STATUS_AUDOUT_ASSIGN_1" vtype="N" vdim="1" vId="87">
-		<port1>2</port1>
+		<port1>0</port1>
 	</entry>
 	<entry vname="STATUS_AUDOUT_ASSIGN_2" vtype="N" vdim="1" vId="88">
-		<port1>2</port1>
+		<port1>0</port1>
 	</entry>
 	<entry vname="STATUS_AUDOUT_ASSIGN_3" vtype="N" vdim="1" vId="89">
-		<port1>2</port1>
+		<port1>0</port1>
 	</entry>
 	<entry vname="STATUS_AUDOUT_ASSIGN_4" vtype="N" vdim="1" vId="90">
-		<port1>2</port1>
+		<port1>6</port1>
 	</entry>
 	<entry vname="STATUS_MIC1" vtype="S" vdim="1" vId="91">
 		<port1>OFF</port1>
@@ -114,7 +114,7 @@
 		<port6>PCM-8CH</port6>
 		<port7>PCM-8CH</port7>
 		<port8>PCM-2CH</port8>
-		<port9>PCM-2CH</port9>
+		<port9>PCM-8CH</port9>
 		<port10>PCM-2CH</port10>
 		<port11>PCM-2CH</port11>
 		<port12>PCM-2CH</port12>
@@ -184,10 +184,10 @@
 		<port4>OFF</port4>
 	</entry>
 	<entry vname="VIDEO_OUTPUT_MUTE" vtype="S" vdim="4" vId="247">
-		<port1>ENABLE</port1>
-		<port2>ENABLE</port2>
-		<port3>ENABLE</port3>
-		<port4>ENABLE</port4>
+		<port1>DISABLE</port1>
+		<port2>DISABLE</port2>
+		<port3>DISABLE</port3>
+		<port4>DISABLE</port4>
 	</entry>
 	<entry vname="VALENSETHERNET" vtype="S" vdim="4" vId="288">
 		<port1>AUTO</port1>
@@ -445,8 +445,8 @@
 		<port3>OFF</port3>
 	</entry>
 	<entry vname="VIDIN_TYPE_MULTIFORMAT" vtype="S" vdim="10" vId="24">
-		<port1>HDMI</port1>
-		<port2>HDMI</port2>
+		<port1>DVI</port1>
+		<port2>DVI</port2>
 		<port3>HDMI</port3>
 		<port4>DVI</port4>
 		<port5>VGA</port5>
@@ -763,7 +763,7 @@
 		<port1>House Cameras</port1>
 	</entry>
 	<entry vname="SOURCE_NAME_3" vtype="Z" vdim="1" vId="115">
-		<port1>Bed Room Laptop</port1>
+		<port1>Dvi 3</port1>
 	</entry>
 	<entry vname="SOURCE_NAME_4" vtype="Z" vdim="1" vId="116">
 		<port1>Dvi 4</port1>
@@ -778,10 +778,10 @@
 		<port1>Living Room Xbox</port1>
 	</entry>
 	<entry vname="SOURCE_NAME_8" vtype="Z" vdim="1" vId="120">
-		<port1>Living Room Spare HDMI</port1>
+		<port1>Bed Room Pc</port1>
 	</entry>
 	<entry vname="SOURCE_NAME_9" vtype="Z" vdim="1" vId="121">
-		<port1>Bed Room Pc</port1>
+		<port1>Spare DxLink</port1>
 	</entry>
 	<entry vname="SOURCE_NAME_10" vtype="Z" vdim="1" vId="122">
 		<port1>Master Cable Box</port1>
@@ -820,10 +820,10 @@
 		<port4>100</port4>
 	</entry>
 	<entry vname="AUDOUT_EQ_PRESET" vtype="S" vdim="4" vId="47">
-		<port1>VOICE</port1>
-		<port2>VOICE</port2>
-		<port3>VOICE</port3>
-		<port4>VOICE</port4>
+		<port1>OFF</port1>
+		<port2>OFF</port2>
+		<port3>OFF</port3>
+		<port4>OFF</port4>
 	</entry>
 	<entry vname="AUDOUT_BALANCE" vtype="N" vdim="4" vId="48">
 		<port1>0</port1>
@@ -952,10 +952,10 @@
 		<port4>OFF</port4>
 	</entry>
 	<entry vname="AUDOUT_SPDIF_SRC" vtype="S" vdim="4" vId="53">
-		<port1>HDMI OUT 1</port1>
-		<port2>HDMI OUT 1</port2>
-		<port3>HDMI OUT 1</port3>
-		<port4>HDMI OUT 1</port4>
+		<port1>HDMI OUT 4</port1>
+		<port2>HDMI OUT 4</port2>
+		<port3>HDMI OUT 4</port3>
+		<port4>HDMI OUT 4</port4>
 	</entry>
 	<entry vname="AUDIN_SELECTED" vtype="N" vdim="1" vId="65">
 		<port1>1</port1>
@@ -1021,10 +1021,10 @@
 		<port4>OFF</port4>
 	</entry>
 	<entry vname="AUDIO_OUTPUT_LINE_MUTE" vtype="S" vdim="4" vId="249">
-		<port1>ENABLE</port1>
-		<port2>ENABLE</port2>
-		<port3>ENABLE</port3>
-		<port4>ENABLE</port4>
+		<port1>DISABLE</port1>
+		<port2>DISABLE</port2>
+		<port3>DISABLE</port3>
+		<port4>DISABLE</port4>
 	</entry>
 	<entry vname="AUDIO_OUTPUT_HDMI_SELECT" vtype="S" vdim="4" vId="313">
 		<port1>OUTPUT 1</port1>
@@ -1273,10 +1273,10 @@
 		<port4>BELL</port4>
 	</entry>
 	<entry vname="VIDOUT_SCALING" vtype="S" vdim="4" vId="3">
-		<port1>MANUAL</port1>
-		<port2>MANUAL</port2>
-		<port3>MANUAL</port3>
-		<port4>MANUAL</port4>
+		<port1>BYPASS</port1>
+		<port2>BYPASS</port2>
+		<port3>BYPASS</port3>
+		<port4>BYPASS</port4>
 	</entry>
 	<entry vname="VIDOUT_RESOLUTION" vtype="S" vdim="4" vId="4">
 		<port1>1920X1080P 60HZ</port1>
@@ -1288,7 +1288,7 @@
 		<port1>MAINTAIN</port1>
 		<port2>MAINTAIN</port2>
 		<port3>MAINTAIN</port3>
-		<port4>STRETCH</port4>
+		<port4>MAINTAIN</port4>
 	</entry>
 	<entry vname="VIDOUT_OSD_OVERLAY" vtype="S" vdim="4" vId="7">
 		<port1>ENABLE</port1>
@@ -1339,16 +1339,16 @@
 		<port4>0</port4>
 	</entry>
 	<entry vname="VIDOUT_V_SIZE" vtype="N" vdim="4" vId="17">
-		<port1>100</port1>
+		<port1>95</port1>
 		<port2>100</port2>
 		<port3>100</port3>
 		<port4>95</port4>
 	</entry>
 	<entry vname="VIDOUT_V_SHIFT" vtype="N" vdim="4" vId="18">
-		<port1>0</port1>
+		<port1>28</port1>
 		<port2>0</port2>
 		<port3>0</port3>
 		<port4>0</port4>
 	</entry>
 </dd-configuration>
-SIZECHECK00008a29
+SIZECHECK00008a12

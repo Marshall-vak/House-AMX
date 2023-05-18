@@ -161,6 +161,18 @@
 <FilePathName>modules\amx-dvx-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-dxlink-api</Identifier>
+<FilePathName>modules\amx-dxlink-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-dxlink-control</Identifier>
+<FilePathName>modules\amx-dxlink-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-dxlink-listener</Identifier>
+<FilePathName>modules\amx-dxlink-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="Include"><Identifier>amx-modero-api</Identifier>
 <FilePathName>modules\amx-modero-api.axi</FilePathName>
 <Comments></Comments>

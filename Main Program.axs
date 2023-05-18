@@ -2,6 +2,7 @@ PROGRAM_NAME='Main Program'
 
 #include 'amx-dvx-control'
 #include 'amx-modero-control'
+#include 'amx-dxlink-control'
 #include 'debug'
 
 //so much easier with the libs
@@ -87,10 +88,16 @@ dvSWV = 5002:1:8	// Switcher Video
 dvSWA = 5002:1:10	// Switcher Audio
  
 //Video outputs
-dvHdmi1_MBRoomTv = 5002:1:0
-dvHdmi2_HRoomTv = 5002:2:0
-dvHdmi3_4thRoom = 5002:3:0
+dvHdmi1_HRoomTv = 5002:1:0
+dvHdmi2_4thRoom = 5002:2:0
+dvHdmi3_MBRoomTv = 5002:3:0
 dvHdmi4_LroomTv = 5002:4:0
+
+//DxLink
+dvDxLinkTx1_HRoomTv = 20001:1:0
+dvDxLinkRx1_HRoomTv = 20002:1:0
+dvDxLinkTx3_MBRoomTv = 20003:1:0
+dvDxLinkRx3_MBRoomTv = 20004:1:0
 
 //Touch Pannels
 dvTP_HRoom = 10001:1:0	 // HRoom
@@ -111,7 +118,7 @@ TL_LOOP = 1
 DEFINE_VARIABLE
 
 // loop io as its fun
-LONG lLoopTimes[] = { 500, 500, 500, 500, 500, 500, 500, 500 }
+//LONG lLoopTimes[] = { 500, 500, 500, 500, 500, 500, 500, 500 }
 
 //buttons
 //12 camera buttons
@@ -121,8 +128,8 @@ LONG lLoopTimes[] = { 500, 500, 500, 500, 500, 500, 500, 500 }
 integer InputButtons[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }
 
 //per room device input codes in order left to right
-integer HRoomInputs[] = { 5, 6, 1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 2 }
-integer LRoomInputs[] = { 6, 10, 5, 7, 1, 13, 0, 0, 0, 0, 0, 0, 0, 0, 2 }
+integer HRoomInputs[] = { 8, 9, 7, 1, 6, 5, 0, 0, 0, 0, 0, 2 }
+integer LRoomInputs[] = { 6, 10, 5, 7, 1, 13, 0, 0, 0, 0, 0, 2 }
 
 //Display Power Buttons
 integer DisplayPower[] = { 254, 255 }
@@ -131,8 +138,17 @@ integer PowerOnButtons[] = { 255 }
 //Pc Power Buttons
 integer LivingRoomPcPower[] = { 30 }
 
+//image mute button
+integer ImageMuteButtons[] = { 243 }
+
+//display on and off
+integer DisplayPowerOnButtons[] = { 255 }
+integer DisplayPowerOffButtons[] = { 254 }
+
 //touch pannels
 DEV dvTPMaster[] = { dvTP_HRoom, dvTP_LRoom }
+DEV dvDxMaster[] = { dvDxLinkTx1_HRoomTv, dvDxLinkRx1_HRoomTv, dvDxLinkTx3_MBRoomTv, dvDxLinkRx3_MBRoomTv }
+DEV dvHdmiMaster[] = { dvHdmi1_HRoomTv, dvHdmi2_4thRoom, dvHdmi3_MBRoomTv, dvHdmi4_LroomTv }
 
 
 //dynamic device
@@ -164,7 +180,7 @@ DEFINE_START
 print("'Starting AMX Automation!'", false);
  
 // loop io as its fun
-TIMELINE_CREATE(TL_LOOP, lLoopTimes, LENGTH_ARRAY(lLoopTimes), TIMELINE_RELATIVE, TIMELINE_REPEAT);
+//TIMELINE_CREATE(TL_LOOP, lLoopTimes, LENGTH_ARRAY(lLoopTimes), TIMELINE_RELATIVE, TIMELINE_REPEAT);
  
 (***********************************************************)
 (*                  THE EVENTS GO BELOW                    *)
@@ -179,6 +195,7 @@ dvCOM2_LroomTv = 5001:2:0	// RS-232 port 2 (Sharp)
 dvCOM3_MBRoomTv = 5001:3:0	// RS-232 port 3 
 dvCOM4 = 5001:4:0	// RS-232 port 4 
 *)
+
 
 //serial links
 DATA_EVENT[dvCOM2_HRoomTv]
@@ -211,32 +228,23 @@ DATA_EVENT[dvCOM4_LroomTv]
 
 
 // beep dvTP1 on startup 
-DATA_EVENT[dvTP_HRoom]
+DATA_EVENT[dvTPMaster]
 {
     ONLINE:
     {
-        moderoBeepDouble(dvTP_HRoom)
-	SEND_STRING dvCONSOLE, 'a TP came Online!'
+        moderoBeepDouble(Data.Device)
+	moderoDisableAllPopups(Data.Device)
+	SEND_STRING dvCONSOLE, "'a TP came Online:', devToString(Data.Device)"
     }
 }
 
-// beep dvTP2 on startup 
-DATA_EVENT[dvTP_LRoom]
+//DxLink
+DATA_EVENT[dvDxMaster]
 {
-    ONLINE:
-    {
-        moderoBeepDouble(dvTP_LRoom)
-	SEND_STRING dvCONSOLE, 'a TP came Online!'
+    online: {
+	SEND_STRING dvCONSOLE, "'A DxLink Box Came online: ', devToString(Data.Device)"
     }
 }
-
-(*
-    room numbers
-    HBedroom = 2
-    LivingRoom = 1
-    MBedroom = 3 
-    MBathroom = 4
-*)
 
 //Button Press
  BUTTON_EVENT[dvTPMaster, 0]
@@ -262,42 +270,56 @@ DATA_EVENT[dvTP_LRoom]
 	AudOutput = 0
 	
 	if (BUTTON.INPUT.DEVICE == dvTP_HRoom){
-	    VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
-	    VidOutput = 2
-	    AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
-	    AudOutput = 2
-	    dvDynamicHdmi = dvHdmi2_HRoomTv
+	    if (BUTTON.INPUT.CHANNEL <= 12){
+		VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+		AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    }
+	    
+	    VidOutput = 1
+	    AudOutput = 0
+	    dvDynamicHdmi = dvHdmi1_HRoomTv
 	    dvDynamicCom = dvCOM2_HRoomTv
 	}
 	    
 	if (BUTTON.INPUT.DEVICE == dvTP_LRoom){
-	    VidInput = LRoomInputs[BUTTON.INPUT.CHANNEL]
+	    if (BUTTON.INPUT.CHANNEL <= 12){
+		VidInput = LRoomInputs[BUTTON.INPUT.CHANNEL]
+		AudInput = LRoomInputs[BUTTON.INPUT.CHANNEL]
+	    }
+		
 	    VidOutput = 4
-	    AudInput = LRoomInputs[BUTTON.INPUT.CHANNEL]
-	    AudOutput = 3
+	    AudOutput = 0
 	    dvDynamicHdmi = dvHdmi4_LroomTv
 	    dvDynamicCom = dvCOM4_LroomTv
 	}
 	
 	if (BUTTON.INPUT.DEVICE == dvTP_MBRoom){
-	    VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
-	    VidOutput = 1
-	    AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    if (BUTTON.INPUT.CHANNEL <= 12){
+		VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+		AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    }
+	    
+	    VidOutput = 3
 	    AudOutput = 0
-	    dvDynamicHdmi = dvHdmi1_MBRoomTv
+	    dvDynamicHdmi = dvHdmi3_MBRoomTv
 	    dvDynamicCom = dvCOM1_MBRoomTv
 	}
 	
 	if (BUTTON.INPUT.DEVICE == dvTP_4thRoom){
-	    VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
-	    VidOutput = 3
-	    AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    if (BUTTON.INPUT.CHANNEL <= 12){
+		VidInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+		AudInput = HRoomInputs[BUTTON.INPUT.CHANNEL]
+	    }
+	    
+	    VidOutput = 2
 	    AudOutput = 0
-	    dvDynamicHdmi = dvHdmi3_4thRoom
+	    dvDynamicHdmi = dvHdmi2_4thRoom
 	    dvDynamicCom = dvCOM3_4thRoom
 	}
 	
 	if (fnGetIndex(InputButtons, BUTTON.INPUT.CHANNEL) != 0){
+	    SEND_STRING dvCONSOLE, "'Input Button!'"
+	
 	    //dvxSwitchVideoOnly(dev dvxPort1, integer input, integer output)
 	    //dvxSwitchAudioOnly(dev dvxPort1, integer input, integer output)
 	    if (VidOutput != 0 && VidInput != 0){
@@ -338,6 +360,24 @@ DATA_EVENT[dvTP_LRoom]
 	if (fnGetIndex(LivingRoomPcPower, BUTTON.INPUT.CHANNEL) != 0){
 	    ON[dvRELAY, 4]
 	}
+	
+	if (fnGetIndex(ImageMuteButtons, BUTTON.INPUT.CHANNEL) != 0){
+	    dvxRequestVideoOutputMute(dvDynamicHdmi)
+	    
+	    //yes twice
+	    moderoToggleButtonFeedback(BUTTON.INPUT.DEVICE, BUTTON.INPUT.CHANNEL)
+	    moderoToggleButtonFeedback(BUTTON.INPUT.DEVICE, BUTTON.INPUT.CHANNEL)
+	}
+	
+	if (fnGetIndex(DisplayPowerOnButtons, BUTTON.INPUT.CHANNEL) != 0){
+	    if (VidOutput == 1){
+		dvxEnableVideoOutputOn(dvDynamicHdmi)
+	    }
+	}else if (fnGetIndex(DisplayPowerOffButtons, BUTTON.INPUT.CHANNEL) != 0){
+	    if (VidOutput == 1){
+		dvxDisableVideoOutputOn(dvDynamicHdmi)
+	    }
+	}
     }
     
     RELEASE:
@@ -348,6 +388,23 @@ DATA_EVENT[dvTP_LRoom]
     }    
 }
 
+
+data_event[dvHdmiMaster]
+{
+    command:
+    {
+	// parse your response here (it will be in data.text)
+	if (data.text == "'VIDOUT_MUTE-DISABLE'"){
+	    dvxEnableVideoOutputMute(data.Device)
+	}
+    
+	if (data.text == "'VIDOUT_MUTE-ENABLE'"){
+	    dvxDisableVideoOutputMute(data.Device)
+	}
+    }
+}
+
+(*
 // loop io as its fun
 TIMELINE_EVENT[TL_LOOP]
 {
@@ -360,3 +417,4 @@ TIMELINE_EVENT[TL_LOOP]
     [dvIO,7] = (TIMELINE.SEQUENCE == 7)
     [dvIO,8] = (TIMELINE.SEQUENCE == 8)
 }
+*)
