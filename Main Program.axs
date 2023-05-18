@@ -105,6 +105,9 @@ dvTP_LRoom = 10002:1:0	 // Lroom
 dvTP_MBRoom = 10003:1:0	 // HRoom
 dvTP_4thRoom = 10004:1:0 // 4th room 
 
+//html5 webpannel
+vdvSwitcher = 41001:1:0;
+
 (***********************************************************)
 (*               CONSTANT DEFINITIONS GO BELOW             *)
 (***********************************************************)
@@ -181,6 +184,13 @@ print("'Starting AMX Automation!'", false);
  
 // loop io as its fun
 //TIMELINE_CREATE(TL_LOOP, lLoopTimes, LENGTH_ARRAY(lLoopTimes), TIMELINE_RELATIVE, TIMELINE_REPEAT);
+
+(***********************************************************)
+(*                MODULE DEFINITIONS GO BELOW              *)
+(***********************************************************)
+DEFINE_MODULE 
+
+'DvxSwitcherDashboard_dr1_0_0' DvxSwitcherDashboard_dr1_0_0(vdvSwitcher, dvDVXSW);
  
 (***********************************************************)
 (*                  THE EVENTS GO BELOW                    *)
@@ -234,6 +244,7 @@ DATA_EVENT[dvTPMaster]
     {
         moderoBeepDouble(Data.Device)
 	moderoDisableAllPopups(Data.Device)
+	moderoEnablePopup(Data.Device, 'MAIN SELECT')
 	SEND_STRING dvCONSOLE, "'a TP came Online:', devToString(Data.Device)"
     }
 }
@@ -393,14 +404,58 @@ data_event[dvHdmiMaster]
 {
     command:
     {
+	LOCAL_VAR INTEGER ButtonEnabled
+	LOCAL_VAR dev dvlocalPannel
+	
 	// parse your response here (it will be in data.text)
 	if (data.text == "'VIDOUT_MUTE-DISABLE'"){
 	    dvxEnableVideoOutputMute(data.Device)
+	    ButtonEnabled = TRUE
 	}
     
 	if (data.text == "'VIDOUT_MUTE-ENABLE'"){
 	    dvxDisableVideoOutputMute(data.Device)
+	    ButtonEnabled = FALSE
 	}
+	
+	switch(data.Device){
+	    case dvHdmi1_HRoomTv:{
+		dvlocalPannel = dvTP_HRoom
+	    }
+		
+	    case dvHdmi2_4thRoom:{
+		dvlocalPannel = dvTP_4thRoom
+	    }
+		
+	    case dvHdmi3_MBRoomTv:{
+		dvlocalPannel = dvTP_MBRoom
+	    }
+		
+	    case dvHdmi4_LroomTv:{
+		dvlocalPannel = dvTP_LRoom
+	    }
+	}
+	
+	moderoSetButtonFeedback(dvlocalPannel, ImageMuteButtons[1], ButtonEnabled)
+    }
+}
+
+//html5 webpannel
+data_event[vdvSwitcher]
+{
+    online: 
+    {
+	send_command data.device,'DEBUG-1';
+	
+	(***********************************************************)
+	(*                UI customization options                 *)
+	(***********************************************************)
+	// Override reported DVX matrix size
+//	send_command data.device,'PROPERTY-INPUT.COUNT,4';
+//	send_command data.device,'PROPERTY-OUTPUT.COUNT,2';
+
+	// Remove reported DVX Components
+//	send_command data.device,'PROPERTY-Has-microphones,false';
     }
 }
 
