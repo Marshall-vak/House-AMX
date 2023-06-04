@@ -77,9 +77,9 @@ dvIO = 5001:17:0	// GPIO
 dvRELAY = 5001:8:0      //Relays
 
 // RS-232 Connections planned not connected as of now.
-dvCOM1_MBRoomTv = 5001:1:0	// RS-232 port 1 
-dvCOM2_HRoomTv = 5001:2:0	// RS-232 port 2 (Philips)
-dvCOM3_4thRoom = 5001:3:0	// RS-232 port 3 
+dvCOM1_HRoomTv = 5001:1:0	// RS-232 port 1 
+dvCOM2_4thRoom = 5001:2:0	// RS-232 port 2 (Philips)
+dvCOM3_MBRoomTv = 5001:3:0	// RS-232 port 3 
 dvCOM4_LroomTv = 5001:4:0	// RS-232 port 4 (Sharp)
 
 //internal switcher connection
@@ -206,22 +206,6 @@ dvCOM3_MBRoomTv = 5001:3:0	// RS-232 port 3
 dvCOM4 = 5001:4:0	// RS-232 port 4 
 *)
 
-
-//serial links
-DATA_EVENT[dvCOM2_HRoomTv]
-{
-    online: {
-	SEND_COMMAND dvCOM2_HRoomTv,'SET BAUD 9600,N,8,1'
-	SEND_COMMAND dvCOM2_HRoomTv, 'HSOFF'
-    }
-    
-    STRING: {
-	STACK_VAR CHAR msg[16]
-	
-	SEND_STRING dvCONSOLE, "'dvCOM2_HRoomTv returned:', msg"
-    }
-}
-
 DATA_EVENT[dvCOM4_LroomTv]
 {
     online: {
@@ -289,7 +273,7 @@ DATA_EVENT[dvDxMaster]
 	    VidOutput = 1
 	    AudOutput = 0
 	    dvDynamicHdmi = dvHdmi1_HRoomTv
-	    dvDynamicCom = dvCOM2_HRoomTv
+	    dvDynamicCom = dvCOM1_HRoomTv 
 	}
 	    
 	if (BUTTON.INPUT.DEVICE == dvTP_LRoom){
@@ -301,7 +285,7 @@ DATA_EVENT[dvDxMaster]
 	    VidOutput = 4
 	    AudOutput = 0
 	    dvDynamicHdmi = dvHdmi4_LroomTv
-	    dvDynamicCom = dvCOM4_LroomTv
+	    dvDynamicCom = dvCOM2_4thRoom
 	}
 	
 	if (BUTTON.INPUT.DEVICE == dvTP_MBRoom){
@@ -313,7 +297,7 @@ DATA_EVENT[dvDxMaster]
 	    VidOutput = 3
 	    AudOutput = 0
 	    dvDynamicHdmi = dvHdmi3_MBRoomTv
-	    dvDynamicCom = dvCOM1_MBRoomTv
+	    dvDynamicCom = dvCOM3_MBRoomTv
 	}
 	
 	if (BUTTON.INPUT.DEVICE == dvTP_4thRoom){
@@ -325,7 +309,7 @@ DATA_EVENT[dvDxMaster]
 	    VidOutput = 2
 	    AudOutput = 0
 	    dvDynamicHdmi = dvHdmi2_4thRoom
-	    dvDynamicCom = dvCOM3_4thRoom
+	    dvDynamicCom = dvCOM4_LroomTv
 	}
 	
 	if (fnGetIndex(InputButtons, BUTTON.INPUT.CHANNEL) != 0){
@@ -380,9 +364,17 @@ DATA_EVENT[dvDxMaster]
 	    if (VidOutput == 1){
 		dvxEnableVideoOutputOn(dvDynamicHdmi)
 	    }
+	    
+	    if (VidOutput == 4){
+		SEND_STRING dvCOM4_LroomTv, "'POWR0', $0A"
+	    }
 	}else if (fnGetIndex(DisplayPowerOffButtons, BUTTON.INPUT.CHANNEL) != 0){
 	    if (VidOutput == 1){
 		dvxDisableVideoOutputOn(dvDynamicHdmi)
+	    }
+	    
+	    if (VidOutput == 4){
+		SEND_STRING dvCOM4_LroomTv, "'POWR1', $0A"
 	    }
 	}
     }
