@@ -137,6 +137,146 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-device-control</Identifier>
+<FilePathName>includes\amx-device-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-dvx-api</Identifier>
+<FilePathName>includes\amx-dvx-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-dvx-control</Identifier>
+<FilePathName>includes\amx-dvx-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-dvx-listener</Identifier>
+<FilePathName>includes\amx-dvx-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-dxlink-api</Identifier>
+<FilePathName>includes\amx-dxlink-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-dxlink-control</Identifier>
+<FilePathName>includes\amx-dxlink-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-dxlink-listener</Identifier>
+<FilePathName>includes\amx-dxlink-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-modero-api</Identifier>
+<FilePathName>includes\amx-modero-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-modero-control</Identifier>
+<FilePathName>includes\amx-modero-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-modero-listener</Identifier>
+<FilePathName>includes\amx-modero-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>base64</Identifier>
+<FilePathName>includes\base64.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>binary</Identifier>
+<FilePathName>includes\binary.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>cipher</Identifier>
+<FilePathName>includes\cipher.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>codec</Identifier>
+<FilePathName>includes\codec.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>common</Identifier>
+<FilePathName>includes\common.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>convert</Identifier>
+<FilePathName>includes\convert.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>crypto</Identifier>
+<FilePathName>includes\crypto.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>date-time</Identifier>
+<FilePathName>includes\date-time.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>debug</Identifier>
+<FilePathName>includes\debug.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>dictionary</Identifier>
+<FilePathName>includes\dictionary.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>hash</Identifier>
+<FilePathName>includes\hash.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>hmac</Identifier>
+<FilePathName>includes\hmac.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>http</Identifier>
+<FilePathName>includes\http.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>json-rpc</Identifier>
+<FilePathName>includes\json-rpc.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>json</Identifier>
+<FilePathName>includes\json.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>jwt</Identifier>
+<FilePathName>includes\jwt.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>math</Identifier>
+<FilePathName>includes\math.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>md5</Identifier>
+<FilePathName>includes\md5.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>proto</Identifier>
+<FilePathName>includes\proto.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>sha1</Identifier>
+<FilePathName>includes\sha1.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>sha256</Identifier>
+<FilePathName>includes\sha256.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>string</Identifier>
+<FilePathName>includes\string.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>uri</Identifier>
+<FilePathName>includes\uri.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>websockets</Identifier>
+<FilePathName>includes\websockets.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>xml</Identifier>
+<FilePathName>includes\xml.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="IR"><Identifier>Verizon FIOS</Identifier>
 <FilePathName>IrEdit\Verizon FIOS.irl</FilePathName>
 <Comments></Comments>
@@ -145,144 +285,8 @@
 <FilePathName>Main Program.axs</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="Include"><Identifier>amx-device-control</Identifier>
-<FilePathName>modules\amx-device-control.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>amx-dvx-api</Identifier>
-<FilePathName>modules\amx-dvx-api.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>amx-dvx-control</Identifier>
-<FilePathName>modules\amx-dvx-control.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>amx-dvx-listener</Identifier>
-<FilePathName>modules\amx-dvx-listener.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>amx-dxlink-api</Identifier>
-<FilePathName>modules\amx-dxlink-api.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>amx-dxlink-control</Identifier>
-<FilePathName>modules\amx-dxlink-control.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>amx-dxlink-listener</Identifier>
-<FilePathName>modules\amx-dxlink-listener.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>amx-modero-api</Identifier>
-<FilePathName>modules\amx-modero-api.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>amx-modero-control</Identifier>
-<FilePathName>modules\amx-modero-control.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>amx-modero-listener</Identifier>
-<FilePathName>modules\amx-modero-listener.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>base64</Identifier>
-<FilePathName>modules\base64.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>binary</Identifier>
-<FilePathName>modules\binary.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>cipher</Identifier>
-<FilePathName>modules\cipher.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>codec</Identifier>
-<FilePathName>modules\codec.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>common</Identifier>
-<FilePathName>modules\common.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>convert</Identifier>
-<FilePathName>modules\convert.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>crypto</Identifier>
-<FilePathName>modules\crypto.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>date-time</Identifier>
-<FilePathName>modules\date-time.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>debug</Identifier>
-<FilePathName>modules\debug.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>dictionary</Identifier>
-<FilePathName>modules\dictionary.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>hash</Identifier>
-<FilePathName>modules\hash.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>hmac</Identifier>
-<FilePathName>modules\hmac.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>http</Identifier>
-<FilePathName>modules\http.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>json-rpc</Identifier>
-<FilePathName>modules\json-rpc.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>json</Identifier>
-<FilePathName>modules\json.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>jwt</Identifier>
-<FilePathName>modules\jwt.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>math</Identifier>
-<FilePathName>modules\math.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>md5</Identifier>
-<FilePathName>modules\md5.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>proto</Identifier>
-<FilePathName>modules\proto.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>sha1</Identifier>
-<FilePathName>modules\sha1.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>sha256</Identifier>
-<FilePathName>modules\sha256.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>string</Identifier>
-<FilePathName>modules\string.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>uri</Identifier>
-<FilePathName>modules\uri.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>websockets</Identifier>
-<FilePathName>modules\websockets.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>xml</Identifier>
-<FilePathName>modules\xml.axi</FilePathName>
+<File CompileType="Netlinx" Type="DUET"><Identifier>DvxSwitcherDashboard_dr1_0_0</Identifier>
+<FilePathName>module\DvxSwitcherDashboard_dr1_0_0.jar</FilePathName>
 <Comments></Comments>
 </File>
 </System>
