@@ -285,9 +285,26 @@
 <FilePathName>Main Program V2.axs</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Source"><Identifier>Main Program</Identifier>
+<FilePathName>Main Program.axs</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="DUET"><Identifier>DvxSwitcherDashboard_dr1_0_0</Identifier>
 <FilePathName>module\DvxSwitcherDashboard_dr1_0_0.jar</FilePathName>
 <Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="TP4"><Identifier>main</Identifier>
+<FilePathName>panel\main.TP4</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvTP_HRoom"><DevName>dvTP_HRoom</DevName>
+</DeviceMap>
+<DeviceMap DevAddr="dvTP_LRoom"><DevName>dvTP_LRoom</DevName>
+</DeviceMap>
+</File>
+<File CompileType="Netlinx" Type="Other"><Identifier>connections</Identifier>
+<FilePathName>planning\connections.txt</FilePathName>
+<Comments></Comments>
+<MasterDirectory>\</MasterDirectory>
 </File>
 </System>
 </Project>
