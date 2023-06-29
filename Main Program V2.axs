@@ -124,7 +124,7 @@ DEFINE_TYPE
 STRUCTURE TouchPannel
 {
     DEV Id
-    CHAR TouchPanelPage
+    CHAR TouchPanelPage[25]
 }
 
 
@@ -133,12 +133,7 @@ STRUCTURE TouchPannel
 (***********************************************************)
 DEFINE_CONSTANT
 
-TL_LOOP = 1
-
-(***********************************************************)
-(*               VARIABLE DEFINITIONS GO BELOW             *)
-(***********************************************************)
-DEFINE_VARIABLE
+//TL_LOOP = 1
 
 // loop io as its fun
 //LONG lLoopTimes[] = { 500, 500, 500, 500, 500, 500, 500, 500 }
@@ -163,7 +158,7 @@ integer InputButtons[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
 //should be in order
 integer ValidRoomNumbers[] = { 1, 2, 3, 4 }
 //should match the order room to number in the table above
-CHAR RoomTPPageNames[] = { 'Main Bedroom', 'Main Bath Room', 'Main Master Bedroom', 'Main Living Room' }
+RoomTPPageNames[][25] = { 'Main Bedroom', 'Main Bath Room', 'Main Master Bedroom', 'Main Living Room' }
 
 //room select buttons
 //the 10xx button range is reserved to room select buttons
@@ -190,6 +185,11 @@ DEV dvHdmiMaster[] = { dvHdmi1_HRoomTv, dvHdmi2_4thRoom, dvHdmi3_MBRoomTv, dvHdm
 DEV dvDvxDxlinkInMaster[] = { dvDvxDxLinkIn1, dvDvxDxLinkIn2 }
 DEV dvDvxDxLinkOutMaster[] = { dvDvxDxLinkOut1, dvDvxDxLinkOut2 }
 
+(***********************************************************)
+(*               VARIABLE DEFINITIONS GO BELOW             *)
+(***********************************************************)
+DEFINE_VARIABLE
+
 //Dynamic touch pannel 
 TouchPannel TouchPannels[100]
 
@@ -201,9 +201,9 @@ DEFINE_FUNCTION INTEGER fnGetIndex(INTEGER nArray[], INTEGER nValue){
 
    INTEGER x
    
-   FOR (x=1; x<=LENGTH_ARRAY(nArray); x++) {
-      IF (nArray[x] = nValue) RETURN x
-   }
+    FOR (x=1; x<=LENGTH_ARRAY(nArray); x++) {
+	IF (nArray[x] = nValue) RETURN x
+    }
 
    RETURN 0
 
@@ -211,9 +211,6 @@ DEFINE_FUNCTION INTEGER fnGetIndex(INTEGER nArray[], INTEGER nValue){
 
 
 DEFINE_FUNCTION TPSetupPageTracking(dev panelId, char CompletedPage[]){
-    INTEGER PanelIndex
-    INTEGER x
-
     TouchPannels[panelId.number].Id = panelId
     TouchPannels[panelId.number].TouchPanelPage = CompletedPage
     
@@ -224,12 +221,21 @@ DEFINE_FUNCTION TPSetupPageTracking(dev panelId, char CompletedPage[]){
 
 DEFINE_FUNCTION INTEGER TPGetRoomNumber(dev panelId){
     INTEGER RoomNumber
-    Char RoomName
+    CHAR RoomName
+    INTEGER x
     
     //if its in the table and its on a valid room page
     if (RoomNumber != 0){
+	//get the page name from the touch pannel id then cross refrence against the room table to get the number
 	RoomName = TouchPannels[panelId.number].TouchPanelPage
-	RoomNumber = RoomTPPageNames[RoomName]
+	SEND_STRING dvCONSOLE, "'TPGetRoomNumber Called RoomName: ', RoomName"
+	
+	FOR (x=1; x<=LENGTH_ARRAY(RoomTPPageNames); x++) {
+	    IF (RoomTPPageNames[x] = RoomName) RoomNumber = x
+	}
+	
+	SEND_STRING dvCONSOLE, "'TPGetRoomNumber Called RoomNumber: ', ITOA(RoomNumber)"
+	
 	//finally we verify that the room number is valid
 	if (fnGetIndex(ValidRoomNumbers, RoomNumber) != 0){
 	    return RoomNumber
@@ -244,9 +250,12 @@ DEFINE_FUNCTION INTEGER TPGetPage(dev panelId){
     return TouchPannels[panelId.number].TouchPanelPage
 }
 
-DEFINE_FUNCTION INTEGER TPSetPage(dev panelId, char PageName){
+DEFINE_FUNCTION INTEGER TPSetPage(dev panelId, char PageName[]){
     TouchPannels[panelId.number].TouchPanelPage = PageName
     moderoSetPage(panelId, PageName)
+    
+    
+    SEND_STRING dvCONSOLE, "'going to: ', PageName"
 }
 
  
@@ -296,6 +305,7 @@ DATA_EVENT[dvTPMaster]
     }
 }
 
+/*
 //DxLink Dvx In
 DATA_EVENT[dvDvxDxlinkInMaster]
 {
@@ -313,6 +323,7 @@ DATA_EVENT[dvDvxDxlinkOutMaster]
 	dvxEnableDxlinkOutputPortEthernet(Data.Device)
     }
 }
+*/
 
 //DxLink
 DATA_EVENT[dvDxMaster]
@@ -333,7 +344,7 @@ DATA_EVENT[dvDxMaster]
 	
         TO[BUTTON.INPUT]
 	
-	SEND_STRING dvCONSOLE, "'Button pushed on dvTP: ', devToString(Button.Input.Device), ' Page: ', TPGetPage(Button.Input.Device) , ' BUTTON.INPUT.CHANNEL: ', ITOA(BUTTON.INPUT.CHANNEL)"
+	SEND_STRING dvCONSOLE, "'Button pushed on dvTP: ', devToString(Button.Input.Device), ' Page: ', TPGetPage(Button.Input.Device), ' RoomNumber: ', ITOA(TPGetRoomNumber(Button.Input.Device)), ' BUTTON.INPUT.CHANNEL: ', ITOA(BUTTON.INPUT.CHANNEL)"
 	
 	RoomNumber = TPGetRoomNumber(Button.Input.Device)
 	
@@ -343,16 +354,12 @@ DATA_EVENT[dvDxMaster]
 	    if (BUTTON.INPUT.CHANNEL - 1000 == 0){
 		//subtracting 1000 should give you the room number. in this case it gives 0 witch is the page select screen
 		TPSetPage(Button.Input.Device, 'Room Select')
-		
-		SEND_STRING dvCONSOLE, "'Going to room select'"
 	    }else{
 		//lets work from the inside out with this one
 		//get the requested room number by subtracting 1000 from the button pressed
 		//then get the name of the page assosiated with the room number
 		//finally set the page on the requesting panel to the requested page
 		TPSetPage(Button.Input.Device, RoomTPPageNames[BUTTON.INPUT.CHANNEL - 1000])
-		
-		SEND_STRING dvCONSOLE, "'going to: ', RoomTPPageNames[BUTTON.INPUT.CHANNEL - 1000]"
 	    }
 	}
 	
