@@ -293,8 +293,14 @@ DATA_EVENT[dvTPMaster]
 	TPSetupPageTracking(Data.Device, 'Room Select')
 	
 	FOR (x=1; x<=6; x++) {
-	    moderoSetPageFlipPassword(Data.Device, itoa(x), "1988")
+	    moderoSetPageFlipPassword(Data.Device, itoa(x), '1988')
 	}
+	
+	moderoSetPageFlipPassword(Data.Device, '1', '1988')
+	moderoSetPageFlipPassword(Data.Device, '2', '1988')
+	moderoSetPageFlipPassword(Data.Device, '3', '1988')
+	moderoSetPageFlipPassword(Data.Device, '4', '1988')
+	moderoSetPageFlipPassword(Data.Device, '5', '1988')
 	
 	
 	//enable touch pannel
