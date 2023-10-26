@@ -32,7 +32,7 @@ program_name='debug'
 
 define_variable
 
-volatile debug = false;
+volatile debug = true;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,6 +78,9 @@ define_function print(char data[], integer multiLine) {
 				}
 			}
 			send_string 0, "'DEBUG: ',remove_string(temp,temp,1)"
+			
+			//send a debug log to com 6
+			send_string 5001:6:0, "'DEBUG: ',remove_string(temp,temp,1),$0D,$0A"
 		}
 	}
 }
