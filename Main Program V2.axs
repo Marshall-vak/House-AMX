@@ -79,7 +79,7 @@ dvRELAY = 5001:8:0      //Relays
 
 // RS-232 Connections planned not connected as of now.
 dvCOM1_HRoomTv = 5001:1:0	// RS-232 port 1 
-dvCOM2_4thRoom = 5001:2:0	// RS-232 port 2 (Philips)
+dvCOM2_4thRoomTv = 5001:2:0	// RS-232 port 2 (Philips)
 dvCOM3_MBRoomTv = 5001:3:0	// RS-232 port 3 
 dvCOM4_LroomTv = 5001:4:0	// RS-232 port 4 (Sharp)
 
@@ -89,16 +89,10 @@ dvSWV = 5002:1:8	// Switcher Video
 dvSWA = 5002:1:10	// Switcher Audio
  
 //Video outputs
-dvHdmi1_HRoomTv = 5002:1:0
-dvHdmi2_4thRoom = 5002:2:0
-dvHdmi3_MBRoomTv = 5002:3:0
-dvHdmi4_LroomTv = 5002:4:0
-
-//DxLink DVX in/out
-dvDvxDxLinkIn1 = 5002:1:0
-dvDvxDxLinkIn2 = 5002:2:0
-dvDvxDxLinkOut1 = 5002:3:0
-dvDvxDxLinkOut2 = 5002:4:0
+dvHdmi1_HRoomTv = 5002:1:0	// Video output 1 of the dvx
+dvHdmi2_4thRoomTv = 5002:2:0	// Video output 2 of the dvx
+dvHdmi3_MBRoomTv = 5002:3:0	// Video output 3 of the dvx
+dvHdmi4_LroomTv = 5002:4:0	// Video output 4 of the dvx
 
 //DxLink Boxes
 dvDxLinkTx1_HRoom = 20001:1:0
@@ -110,7 +104,7 @@ dvDxLinkRx3_MBRoom = 20004:1:0
 dvTP_HRoom = 11:1:0	 // HRoom
 dvTP_LRoom = 12:1:0	 // Lroom 
 dvTP_MBRoom = 13:1:0	 // HRoom
-dvTP_4thRoom = 14:1:0 // 4th room 
+dvTP_4thRoom = 14:1:0 	 // 4th room 
 
 //html5 webpannel
 vdvSwitcher = 41001:1:0;
@@ -181,9 +175,7 @@ integer DisplayPowerOffButtons[] = { 254 }
 //Device Groups
 DEV dvTPMaster[] = { dvTP_HRoom, dvTP_LRoom }
 DEV dvDxMaster[] = { dvDxLinkTx1_HRoom, dvDxLinkRx1_HRoom, dvDxLinkTx3_MBRoom, dvDxLinkRx3_MBRoom }
-DEV dvHdmiMaster[] = { dvHdmi1_HRoomTv, dvHdmi2_4thRoom, dvHdmi3_MBRoomTv, dvHdmi4_LroomTv }
-DEV dvDvxDxlinkInMaster[] = { dvDvxDxLinkIn1, dvDvxDxLinkIn2 }
-DEV dvDvxDxLinkOutMaster[] = { dvDvxDxLinkOut1, dvDvxDxLinkOut2 }
+DEV dvHdmiMaster[] = { dvHdmi1_HRoomTv, dvHdmi2_4thRoomTv, dvHdmi3_MBRoomTv, dvHdmi4_LroomTv }
 
 (***********************************************************)
 (*               VARIABLE DEFINITIONS GO BELOW             *)
