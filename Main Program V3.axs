@@ -81,8 +81,15 @@ INTEGER PhysicalInputNumbers[] = { 6, 10, 5, 7, 1, 2, 8, 9, 3, 4 }
 //Input / Output Master
 INTEGER InputOutputMaster[] = { 11, 12, 13, 14, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 }
 
+
+//Living Room Pc Power Button
+INTEGER OptiplexPowerButton[] = { 31 }
+
+//H Room tv on off button
+INTEGER HRoomTvOnOffButton[] = { 32 }
+
 //Button codes on the Main Page ( All of the above )
-INTEGER MainPageMaster[] = { 11, 12, 13, 14, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 }
+INTEGER MainPageMaster[] = { 11, 12, 13, 14, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 }
 
 
 //Audio Popup Power Buttons
@@ -96,9 +103,6 @@ INTEGER ShutdownAbortButton[] = { 120 }
 
 //All Buttons on the Shutdown System Page ( All of the above )
 INTEGER ShutdownPopupMaster[] = { 100 }
-
-//Living Room Pc Power Button
-INTEGER OptiplexPowerButton[] = { 31 }
 
 
 //Group of all touch panels connected to the master
@@ -134,6 +138,9 @@ DEFINE_VARIABLE
 
 // Console command for use in dvCom1 commands to the dgx
 ComCommand[40] = ''
+
+//used during a display power toggle
+INTEGER DisplayToggle = 0
 
 (***********************************************************)
 (*              Function DEFINITIONS GO BELOW              *)
@@ -361,6 +368,20 @@ DEFINE_FUNCTION fnResetSystem()
     }
 }
 
+//Toggle video output
+DEFINE_FUNCTION fnToggleOutput(dev dvhdmi)
+{
+    print("'Toggling output ', ITOA(dvhdmi)", false);
+    
+    //trigger a display toggle event
+    DisplayToggle = 1
+    
+    //check if the display is on or off
+    dvxRequestVideoOutputOn(dvhdmi)
+    
+    //rest of code on data_event[dvHdmiMaster]
+}
+
 (***********************************************************)
 (*               LATCHING DEFINITIONS GO BELOW             *)
 (***********************************************************)
@@ -405,7 +426,7 @@ DEFINE_EVENT
 //for connection to the dgx
 DATA_EVENT[dvCOM1]
 {
-    online: {
+    ONLINE: {
 	SEND_COMMAND dvCOM1,'SET BAUD 9600,N,8,1'
 	SEND_COMMAND dvCOM1, 'HSOFF'
     }
@@ -420,7 +441,7 @@ DATA_EVENT[dvCOM1]
 //for debug spew //connect a computer to this port and open a terminal to see the debug prints
 DATA_EVENT[dvCOM6]
 {
-    online: {
+    ONLINE: {
 	SEND_COMMAND dvCOM1,'SET BAUD 9600,N,8,1'
 	SEND_COMMAND dvCOM1, 'HSOFF'
     }
@@ -433,40 +454,67 @@ DATA_EVENT[dvCOM6]
     }
 }
 
+//Display output toggeler
+DATA_EVENT[dvHdmiMaster]
+{
+    COMMAND:
+    {
+	//if we are currently trying to toggle a display continue
+	if (DisplayToggle == 1){
+	    //debug
+	    //print("devToString(data.Device)", false)
+	    //print("data.text", false)
+	    
+	    //if the display is enabled
+	    if (data.text == 'VIDOUT_ON-ENABLE'){
+		//disable the display
+		dvxDisableVideoOutputOn(data.Device)
+	    } else { //VIDOUT_ON-DISABLE
+		//if the display is disabled
+		//enable the display
+		dvxEnableVideoOutputOn(data.Device)
+	    }
+	    
+	    //stop the display toggle event
+	    DisplayToggle = 0
+	}
+    }
+}
+
 // Touch Panel Startup Program
 DATA_EVENT[dvTPMaster]
 {
     ONLINE:
     {
 	//wake panel
-	moderoWake(Data.Device)
+	moderoWake(data.Device)
 	
 	//setup touch panel
-	moderoDisableAllPopups(Data.Device)
+	moderoDisableAllPopups(data.Device)
 	
 	//set panel passwords
-	moderoSetPageFlipPassword(Data.Device, '1', '1950')
+	moderoSetPageFlipPassword(data.Device, '1', '1950')
 	
 	//Debug Menu Password
-	moderoSetPageFlipPassword(Data.Device, '2', '1998')
+	moderoSetPageFlipPassword(data.Device, '2', '1998')
 	
 	//default unused passwords
-	moderoSetPageFlipPassword(Data.Device, '3', '1988')
-	moderoSetPageFlipPassword(Data.Device, '4', '1988')
+	moderoSetPageFlipPassword(data.Device, '3', '1988')
+	moderoSetPageFlipPassword(data.Device, '4', '1988')
 	
 	//pannel admin password
-	moderoSetPageFlipPassword(Data.Device, '5', '1988')
+	moderoSetPageFlipPassword(data.Device, '5', '1988')
 	
 	//reset input and output feedback for this panel
-	fnResetInputFeedback(Data.Device)
-	fnResetOutputFeedback(Data.Device)
+	fnResetInputFeedback(data.Device)
+	fnResetOutputFeedback(data.Device)
 	
 	//enable touch panel
-	moderoSetPage(Data.Device, 'Main')
-	moderoBeepDouble(Data.Device)
-	moderoEnablePopup(Data.Device, 'Online')
+	moderoSetPage(data.Device, 'Main')
+	moderoBeepDouble(data.Device)
+	moderoEnablePopup(data.Device, 'Online')
 	
-	SEND_STRING dvCONSOLE, "'a TP came Online:', devToString(Data.Device)"
+	print("'a TP came Online:', devToString(data.Device)", false)
     }
 }
 
@@ -492,6 +540,20 @@ DATA_EVENT[dvTPMaster]
 	// if the pressed button is in the MainPageMaster group (table) then run the code
 	if (fnGetIndex(MainPageMaster, BUTTON.INPUT.CHANNEL) != 0){
 	    print("'Button Pressed On The Main Page'", false);
+	    
+	    // if the pressed button is in the OptiplexPowerButton group (table) then run the code
+	    if (fnGetIndex(OptiplexPowerButton, BUTTON.INPUT.CHANNEL) != 0){
+		print("'Optiplex Power Button pressed'", false);
+		
+		ON[dvRELAY, 4]
+	    }
+	    
+	    //HRoomTvOnOffButton
+	    if (fnGetIndex(HRoomTvOnOffButton, BUTTON.INPUT.CHANNEL) != 0){
+		print("'HRoom Tv Toggle Button Pressed'", false);
+		
+		fnToggleOutput(dvHdmi1)
+	    }
 	    
 	    if (fnGetIndex(InputOutputMaster, BUTTON.INPUT.CHANNEL) != 0){
 		if (fnGetIndex(OutputButtons, BUTTON.INPUT.CHANNEL) != 0){
@@ -559,11 +621,6 @@ DATA_EVENT[dvTPMaster]
 		
 		//print("'==================[ implement me ]=================='", false);
 	    }
-	}
-	
-	// if the pressed button is in the OptiplexPowerButton group (table) then run the code
-	if (fnGetIndex(OptiplexPowerButton, BUTTON.INPUT.CHANNEL) != 0){
-	    ON[dvRELAY, 4]
 	}
     }
 

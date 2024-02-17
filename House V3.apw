@@ -109,7 +109,7 @@
        <!ELEMENT Notes (#PCDATA)>
 ]>
 
-<Workspace CurrentVersion="4.0"><Identifier>House V2</Identifier>
+<Workspace CurrentVersion="4.0"><Identifier>House V3</Identifier>
 <CreateVersion>4.0</CreateVersion>
 <PJS_File></PJS_File>
 <PJS_ConvertDate></PJS_ConvertDate>
@@ -277,20 +277,12 @@
 <FilePathName>includes\xml.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="IR"><Identifier>Verizon FIOS</Identifier>
-<FilePathName>IrEdit\Verizon FIOS.irl</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Source"><Identifier>Main Program V2</Identifier>
-<FilePathName>Main Program V2.axs</FilePathName>
+<File CompileType="Netlinx" Type="IR"><Identifier>Spectrum-SR-002-R</Identifier>
+<FilePathName>IrEdit\Spectrum-SR-002-R.irl</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>Main Program V3</Identifier>
 <FilePathName>Main Program V3.axs</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Source"><Identifier>Main Program</Identifier>
-<FilePathName>Main Program.axs</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="DUET"><Identifier>DvxSwitcherDashboard_dr1_0_0</Identifier>
@@ -301,11 +293,15 @@
 <FilePathName>panel\v3\Main - H.TP4</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="TP4"><Identifier>Main</Identifier>
-<FilePathName>panel\v3\Main.TP4</FilePathName>
+<File CompileType="Netlinx" Type="TP4"><Identifier>Main - mst</Identifier>
+<FilePathName>panel\v3\Main - mst.TP4</FilePathName>
 <Comments></Comments>
 <DeviceMap DevAddr="dvTp1"><DevName>dvTp1</DevName>
 </DeviceMap>
+</File>
+<File CompileType="Netlinx" Type="TP4"><Identifier>Main</Identifier>
+<FilePathName>panel\v3\Main.TP4</FilePathName>
+<Comments></Comments>
 <DeviceMap DevAddr="dvTp2"><DevName>dvTp2</DevName>
 </DeviceMap>
 </File>
