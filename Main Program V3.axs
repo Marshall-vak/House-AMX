@@ -46,12 +46,19 @@ dvDvxDxLinkOut2 = 5002:4:0	//DxLink Output 2
 //Touch Panels
 dvTp1 = 11:1:0		// Bedroom Room
 dvTp2 = 12:1:0		// Living room
+dvTp3 = 13:1:0		// Bedroom Room 2
 
 //DxLink Boxes
 dvDxIn1 = 20001:1:0 // Extra
 dvDxIn2 = 20002:1:0 // Master Bedroom Input
 dvDxOut1 = 20003:1:0 // Bedroom output
 dvDxOut2 = 20004:1:0 // Master Bedroom Output
+
+//DxLink Boxes IR Output
+dvDxIn1IrOut = 20001:3:0 // Extra
+dvDxIn2IrOut = 20002:3:0 // Master Bedroom Input
+dvDxOut1IrOut = 20003:3:0 // Bedroom output
+dvDxOut2IrOut = 20004:3:0 // Master Bedroom Output
 
 //html5 webpanel
 vdvSwitcher = 41001:1:0;	// Virtual Device
@@ -118,13 +125,16 @@ DEV dvDvxDxlinkInMaster[] = { dvDvxDxLinkIn1, dvDvxDxLinkIn2 }
 DEV dvDvxDxLinkOutMaster[] = { dvDvxDxLinkOut1, dvDvxDxLinkOut2 }
 
 //Group of all DxLink Input Boxes connected to the master
-Dev dvDxLinkInMaster[] = { dvDxIn1, dvDxIn2 }
+DEV dvDxLinkInMaster[] = { dvDxIn1, dvDxIn2 }
 
 //Group of all DxLink Output Boxes connected to the master
-Dev dvDxLinkOutMaster[] = { dvDxOut1, dvDxOut2 }
+DEV dvDxLinkOutMaster[] = { dvDxOut1, dvDxOut2 }
 
 //Group of all DxLink Boxes connected to the master
-Dev dvDxLinkMaster[] = { dvDxIn1, dvDxIn2, dvDxOut1, dvDxOut2 }
+DEV dvDxLinkMaster[] = { dvDxIn1, dvDxIn2, dvDxOut1, dvDxOut2 }
+
+//Group of all DxLink Boxes Ir Blasters connected to the master
+DEV dvDxLinkIrOutMaster[] = { dvDxIn1IrOut, dvDxIn2IrOut, dvDxOut1IrOut, dvDxOut2IrOut }
 
 (***********************************************************)
 (*              DATA TYPE DEFINITIONS GO BELOW             *)

@@ -277,8 +277,40 @@
 <FilePathName>includes\xml.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="IR"><Identifier>goodee-Projector</Identifier>
+<FilePathName>IrEdit\goodee-Projector.irl</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvDxIn1IrOut"><DevName>dvDxIn1IrOut</DevName>
+</DeviceMap>
+</File>
+<File CompileType="Netlinx" Type="IR"><Identifier>Kenwood-RC-R0608</Identifier>
+<FilePathName>IrEdit\Kenwood-RC-R0608.irl</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="IR"><Identifier>Microsoft-Xbox360</Identifier>
+<FilePathName>IrEdit\Microsoft-Xbox360.IRL</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvDxIn1IrOut"><DevName>dvDxIn1IrOut</DevName>
+</DeviceMap>
+</File>
+<File CompileType="Netlinx" Type="IR"><Identifier>Panasonic-N2QAYB000570</Identifier>
+<FilePathName>IrEdit\Panasonic-N2QAYB000570.irl</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvDxOut2IrOut"><DevName>dvDxOut2IrOut</DevName>
+</DeviceMap>
+</File>
+<File CompileType="Netlinx" Type="IR"><Identifier>Samsung-BN59-01388A</Identifier>
+<FilePathName>IrEdit\Samsung-BN59-01388A.irl</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="IR"><Identifier>Spectrum-SR-002-R</Identifier>
 <FilePathName>IrEdit\Spectrum-SR-002-R.irl</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvDxIn2IrOut"><DevName>dvDxIn2IrOut</DevName>
+</DeviceMap>
+</File>
+<File CompileType="Netlinx" Type="IR"><Identifier>Spectrum-UR5U-8780L-BHC</Identifier>
+<FilePathName>IrEdit\Spectrum-UR5U-8780L-BHC.irl</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>Main Program V3</Identifier>
@@ -292,6 +324,8 @@
 <File CompileType="Netlinx" Type="TP4"><Identifier>Main - H</Identifier>
 <FilePathName>panel\v3\Main - H.TP4</FilePathName>
 <Comments></Comments>
+<DeviceMap DevAddr="dvTp3"><DevName>dvTp3</DevName>
+</DeviceMap>
 </File>
 <File CompileType="Netlinx" Type="TP4"><Identifier>Main - mst</Identifier>
 <FilePathName>panel\v3\Main - mst.TP4</FilePathName>
