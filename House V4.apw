@@ -137,6 +137,11 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
+<File CompileType="Netlinx" Type="Other"><Identifier>connections</Identifier>
+<FilePathName>docs\connections.txt</FilePathName>
+<Comments></Comments>
+<MasterDirectory>\</MasterDirectory>
+</File>
 <File CompileType="Netlinx" Type="Include"><Identifier>amx-device-control</Identifier>
 <FilePathName>includes\amx-device-control.axi</FilePathName>
 <Comments></Comments>
@@ -277,21 +282,9 @@
 <FilePathName>includes\xml.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="IR"><Identifier>goodee-Projector</Identifier>
-<FilePathName>IrEdit\goodee-Projector.irl</FilePathName>
-<Comments></Comments>
-<DeviceMap DevAddr="dvDxIn1IrOut"><DevName>dvDxIn1IrOut</DevName>
-</DeviceMap>
-</File>
 <File CompileType="Netlinx" Type="IR"><Identifier>Kenwood-RC-R0608</Identifier>
 <FilePathName>IrEdit\Kenwood-RC-R0608.irl</FilePathName>
 <Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="IR"><Identifier>Microsoft-Xbox360</Identifier>
-<FilePathName>IrEdit\Microsoft-Xbox360.IRL</FilePathName>
-<Comments></Comments>
-<DeviceMap DevAddr="dvDxIn1IrOut"><DevName>dvDxIn1IrOut</DevName>
-</DeviceMap>
 </File>
 <File CompileType="Netlinx" Type="IR"><Identifier>Panasonic-N2QAYB000570</Identifier>
 <FilePathName>IrEdit\Panasonic-N2QAYB000570.irl</FilePathName>
@@ -313,10 +306,6 @@
 <FilePathName>IrEdit\Spectrum-UR5U-8780L-BHC.irl</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="MasterSrc"><Identifier>Main Program V3</Identifier>
-<FilePathName>Main Program V3.axs</FilePathName>
-<Comments></Comments>
-</File>
 <File CompileType="Netlinx" Type="DUET"><Identifier>DvxSwitcherDashboard_dr1_0_0</Identifier>
 <FilePathName>module\DvxSwitcherDashboard_dr1_0_0.jar</FilePathName>
 <Comments></Comments>
@@ -333,10 +322,9 @@
 <FilePathName>panel\v4\Main.TP4</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="Other"><Identifier>connections</Identifier>
-<FilePathName>planning\connections.txt</FilePathName>
+<File CompileType="Netlinx" Type="Source"><Identifier>Main Program V4-T</Identifier>
+<FilePathName>programs\Main Program V4-T.axs</FilePathName>
 <Comments></Comments>
-<MasterDirectory>\</MasterDirectory>
 </File>
 </System>
 <System IsActive="true" Platform="Netlinx" Transport="Serial" TransportEx="TCPIP"><Identifier>DVX-3155HD-SP</Identifier>
@@ -394,136 +382,32 @@
 <FilePathName>includes\amx-modero-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="Include"><Identifier>base64</Identifier>
-<FilePathName>includes\base64.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>binary</Identifier>
-<FilePathName>includes\binary.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>cipher</Identifier>
-<FilePathName>includes\cipher.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>codec</Identifier>
-<FilePathName>includes\codec.axi</FilePathName>
-<Comments></Comments>
-</File>
 <File CompileType="Netlinx" Type="Include"><Identifier>common</Identifier>
 <FilePathName>includes\common.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="Include"><Identifier>convert</Identifier>
-<FilePathName>includes\convert.axi</FilePathName>
+<File CompileType="Netlinx" Type="Include"><Identifier>console</Identifier>
+<FilePathName>includes\console.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="Include"><Identifier>crypto</Identifier>
-<FilePathName>includes\crypto.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>date-time</Identifier>
-<FilePathName>includes\date-time.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>debug</Identifier>
-<FilePathName>includes\debug.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>dictionary</Identifier>
-<FilePathName>includes\dictionary.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>hash</Identifier>
-<FilePathName>includes\hash.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>hmac</Identifier>
-<FilePathName>includes\hmac.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>http</Identifier>
-<FilePathName>includes\http.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>json-rpc</Identifier>
-<FilePathName>includes\json-rpc.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>json</Identifier>
-<FilePathName>includes\json.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>jwt</Identifier>
-<FilePathName>includes\jwt.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>math</Identifier>
-<FilePathName>includes\math.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>md5</Identifier>
-<FilePathName>includes\md5.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>proto</Identifier>
-<FilePathName>includes\proto.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>sha1</Identifier>
-<FilePathName>includes\sha1.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>sha256</Identifier>
-<FilePathName>includes\sha256.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>string</Identifier>
-<FilePathName>includes\string.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>uri</Identifier>
-<FilePathName>includes\uri.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>websockets</Identifier>
-<FilePathName>includes\websockets.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>xml</Identifier>
-<FilePathName>includes\xml.axi</FilePathName>
+<File CompileType="Netlinx" Type="Include"><Identifier>utils</Identifier>
+<FilePathName>includes\utils.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="IR"><Identifier>goodee-Projector</Identifier>
 <FilePathName>IrEdit\goodee-Projector.irl</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="IR"><Identifier>Kenwood-RC-R0608</Identifier>
-<FilePathName>IrEdit\Kenwood-RC-R0608.irl</FilePathName>
-<Comments></Comments>
-</File>
 <File CompileType="Netlinx" Type="IR"><Identifier>Microsoft-Xbox360</Identifier>
 <FilePathName>IrEdit\Microsoft-Xbox360.IRL</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="IR"><Identifier>Panasonic-N2QAYB000570</Identifier>
-<FilePathName>IrEdit\Panasonic-N2QAYB000570.irl</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="IR"><Identifier>Samsung-BN59-01388A</Identifier>
-<FilePathName>IrEdit\Samsung-BN59-01388A.irl</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="IR"><Identifier>Spectrum-SR-002-R</Identifier>
-<FilePathName>IrEdit\Spectrum-SR-002-R.irl</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="IR"><Identifier>Spectrum-UR5U-8780L-BHC</Identifier>
-<FilePathName>IrEdit\Spectrum-UR5U-8780L-BHC.irl</FilePathName>
-<Comments></Comments>
-</File>
 <File CompileType="Netlinx" Type="DUET"><Identifier>DvxSwitcherDashboard_dr1_0_0</Identifier>
 <FilePathName>module\DvxSwitcherDashboard_dr1_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>DXX Switcher</Identifier>
+<FilePathName>module\DXX Switcher.axs</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="TP4"><Identifier>Main - H</Identifier>
