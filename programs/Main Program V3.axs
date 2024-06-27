@@ -83,7 +83,7 @@ INTEGER PhysicalOutputNumbers[] = { 1, 2, 3, 4 }
 //Input Select Buttons
 INTEGER InputButtons[] = { 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 }
 //Physical input Numbers (IN ORDER)
-INTEGER PhysicalInputNumbers[] = { 6, 10, 5, 8, 1, 2, 7, 9, 3, 4 }
+INTEGER PhysicalInputNumbers[] = { 8, 7, 5, 6, 1, 2, 10, 9, 3, 4 }
 
 //Input / Output Master
 INTEGER InputOutputMaster[] = { 11, 12, 13, 14, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 }

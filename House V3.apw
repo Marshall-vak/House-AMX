@@ -313,10 +313,6 @@
 <FilePathName>IrEdit\Spectrum-UR5U-8780L-BHC.irl</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="MasterSrc"><Identifier>Main Program V3</Identifier>
-<FilePathName>Main Program V3.axs</FilePathName>
-<Comments></Comments>
-</File>
 <File CompileType="Netlinx" Type="DUET"><Identifier>DvxSwitcherDashboard_dr1_0_0</Identifier>
 <FilePathName>module\DvxSwitcherDashboard_dr1_0_0.jar</FilePathName>
 <Comments></Comments>
@@ -343,6 +339,10 @@
 <FilePathName>planning\connections.txt</FilePathName>
 <Comments></Comments>
 <MasterDirectory>\</MasterDirectory>
+</File>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>Main Program V3</Identifier>
+<FilePathName>programs\Main Program V3.axs</FilePathName>
+<Comments></Comments>
 </File>
 </System>
 </Project>
