@@ -27,12 +27,12 @@ DEFINE_CONSTANT
 //Output Select Buttons
 INTEGER OutputButtons[] = { 11, 12, 13, 14 }
 //Physical Output Numbers (IN ORDER)
-INTEGER PhysicalOutputNumbers[] = { 2, 1, 3, 4 }
+INTEGER PhysicalOutputNumbers[] = { 1, 2, 3, 4 }
 
 //Input Select Buttons
 INTEGER InputButtons[] = { 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 }
 //Physical input Numbers (IN ORDER)
-INTEGER PhysicalInputNumbers[] = { 6, 10, 5, 7, 1, 2, 8, 9, 3, 4 }
+INTEGER PhysicalInputNumbers[] = { 5, 6, 7, 8, 1, 2, 3, 4, 9, 10 }
 
 //Input / Output Master
 INTEGER InputOutputMaster[] = { 11, 12, 13, 14, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 }

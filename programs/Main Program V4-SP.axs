@@ -1,4 +1,4 @@
-PROGRAM_NAME='Main Program V4-SP'
+PROGRAM_NAME='Desk AMX'
 
 #include 'amx-dvx-control'
 #include 'amx-modero-control'
@@ -19,7 +19,17 @@ dvCONSOLE = 0:1:0
 dvIO = 5001:17:0	// GPIO
 
 //relays
-dvRELAY = 5001:8:0      //Relays
+dvRELAY = 5001:8:0      // Relays
+
+// NXA_PDU
+dvPDU_1 = 85:1:0	// Left Monitor
+dvPDU_2 = 86:1:0	// Right Monitor
+dvPDU_3 = 87:1:0	// Phillips Displayboard
+dvPDU_4 = 88:1:0	// Not Populated
+dvPDU_5 = 89:1:0	// Not Populated
+dvPDU_6 = 90:1:0	// Not Populated
+dvPDU_7 = 91:1:0	// Not Populated
+dvPDU_8 = 92:1:0	// Not Populated
 
 // RS-232 Connections
 dvCOM1 = 5001:1:0	// RS-232 port 1 
@@ -63,6 +73,7 @@ dvDxOut2IrOut = 20004:3:0 // Master Bedroom Output
 
 //html5 webpanel
 vdvSwitcher = 41001:1:0;	// Virtual Device
+vdvPowerLitex39 = 41002:1:0	// Virtual Device
 
 (***********************************************************)
 (*               CONSTANT DEFINITIONS GO BELOW             *)
@@ -75,12 +86,14 @@ INTEGER WelcomePageStartButton[] = { 1 }
 //All Welcome Page Buttons
 INTEGER WelcomePageMaster[] = { 1 } //WelcomePageStartButton }
 
+INTEGER AllOnButton[] = { 31 }
 
-//H Room tv on off button
-INTEGER HRoomTvOnOffButton[] = { 32 }
+INTEGER SidesOnButton[] = { 32 }
+
+INTEGER AllOffButton[] = { 33 }
 
 //Button codes on the Main Page ( All of the above )
-INTEGER MainPageMaster[] = { 32 }
+INTEGER MainPageMaster[] = { 31, 32, 33 }
 
 
 //Audio Popup Power Buttons
@@ -129,6 +142,8 @@ DEFINE_TYPE
 (*               VARIABLE DEFINITIONS GO BELOW             *)
 (***********************************************************)
 DEFINE_VARIABLE
+
+CHAR EpsonPowerLiteX39[] = 'Epson_Video_Projector_PowerLite_X39_1.0.0.xdd'
 
 //used during a display power toggle
 INTEGER DisplayToggle = 0
@@ -191,6 +206,9 @@ DEFINE_FUNCTION fnToggleOutput(dev dvhdmi)
 
 // Html 5 web panel
 DEFINE_MODULE 'DvxSwitcherDashboard_dr1_0_0' DvxSwitcherDashboard_dr1_0_0(vdvSwitcher, dvDVXSW);
+
+// PowerLite x39
+DEFINE_MODULE 'DeviceDriverEngine' PowerLitex39(vdvPowerLitex39, dvCOM4, EpsonPowerLiteX39)
 
 // Dvx/Dgx Switchers
 // DEFINE_MODULE 'DXX Switcher' mDXXSwitcher(dvTPMaster, dvDVXSW, dvCOM5);
@@ -333,11 +351,28 @@ BUTTON_EVENT[dvTPMaster, 0]
 	if (fnGetIndex(MainPageMaster, BUTTON.INPUT.CHANNEL) != 0){
 	    print("'Button Pressed On The Main Page'", CONSOLE_DEBUG);
 	    
-	    //HRoomTvOnOffButton
-	    if (fnGetIndex(HRoomTvOnOffButton, BUTTON.INPUT.CHANNEL) != 0){
-		print("'HRoom Tv Toggle Button Pressed'", CONSOLE_DEBUG);
+	    if (fnGetIndex(AllOnButton, BUTTON.INPUT.CHANNEL) != 0){
+		print("'Button Pressed On The Main Page'", CONSOLE_DEBUG);
 		
-		fnToggleOutput(dvHdmi2)
+		ON[dvPDU_1, 1]
+		ON[dvPDU_2, 1]
+		ON[dvPDU_3, 1]
+	    }
+	    
+	    if (fnGetIndex(SidesOnButton, BUTTON.INPUT.CHANNEL) != 0){
+		print("'Button Pressed On The Main Page'", CONSOLE_DEBUG);
+		
+		ON[dvPDU_1, 1]
+		ON[dvPDU_2, 1]
+		OFF[dvPDU_3, 1]
+	    }
+	    
+	    if (fnGetIndex(AllOffButton, BUTTON.INPUT.CHANNEL) != 0){
+		print("'Button Pressed On The Main Page'", CONSOLE_DEBUG);
+		
+		OFF[dvPDU_1, 1]
+		OFF[dvPDU_2, 1]
+		OFF[dvPDU_3, 1]
 	    }
 	}
 	

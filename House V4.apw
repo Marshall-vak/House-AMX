@@ -327,7 +327,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="true" Platform="Netlinx" Transport="Serial" TransportEx="TCPIP"><Identifier>DVX-3155HD-SP</Identifier>
+<System IsActive="true" Platform="Netlinx" Transport="Serial" TransportEx="TCPIP"><Identifier>DVX-3255HD-T</Identifier>
 <SysID>0</SysID>
 <TransTCPIP>0.0.0.0</TransTCPIP>
 <TransSerial>COM1,115200,8,None,1,None</TransSerial>
@@ -342,6 +342,10 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
+<File CompileType="Netlinx" Type="XDD"><Identifier>Epson_Video_Projector_PowerLite_X39_1.0.0</Identifier>
+<FilePathName>C:\Users\marshall_vak\Downloads\2017-10-25-Epson-Video Projector-PowerLite X39\XDD\Epson_Video_Projector_PowerLite_X39_1.0.0_projector.development@exc.epson.co.jp\Epson_Video_Projector_PowerLite_X39_1.0.0.xdd</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="Include"><Identifier>amx-device-control</Identifier>
 <FilePathName>includes\amx-device-control.axi</FilePathName>
 <Comments></Comments>
@@ -392,10 +396,6 @@
 </File>
 <File CompileType="Netlinx" Type="Include"><Identifier>utils</Identifier>
 <FilePathName>includes\utils.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="IR"><Identifier>goodee-Projector</Identifier>
-<FilePathName>IrEdit\goodee-Projector.irl</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="IR"><Identifier>Microsoft-Xbox360</Identifier>
